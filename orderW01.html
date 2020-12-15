@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>订单管理-入住</title>
+		<title>订单管理-我的订单</title>
 
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -420,7 +420,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<li class="">
+							<li class="active">
 								<a href="orderW01.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									我的订单
@@ -460,7 +460,7 @@
 
 								<b class="arrow"></b>
 							</li>
-							<li class="active">
+							<li class="">
 								<a href="orderW06.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									入住
@@ -505,8 +505,7 @@
 						</ul>
 					</li>
 
-				</ul>
-				<!-- /.nav-list -->
+				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -527,7 +526,7 @@
 							<li>
 								<a href="#">订单模块</a>
 							</li>
-							<li class="active">入住</li>
+							<li class="active">我的订单</li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 
@@ -604,7 +603,7 @@
 								<!-- PAGE CONTENT BEGINS 自己写的内容-->
 
 								<!-- 表格 -->
-								<div class="col-xs-12" id="orderTable06">
+								<div class="col-xs-12" id="orderTable01">
 									<h4 class="header smaller lighter blue">订单列表</h4>
 									<!--四个小图标-->
 									<div class="clearfix">
@@ -646,9 +645,9 @@
 												<th>订单总额</th>
 												<th class="hidden-480">入住时间</th>
 												<th class="hidden-480">离店时间</th>
-												<th>入住人</th>
-												<th class="hidden-480">联系方式</th>
-												<th>类型</th>
+												<th>房源</th>
+												<th>订房类型</th>
+												<th>状态</th>
 												<th>操作</th>
 											</tr>
 											</thead>
@@ -663,19 +662,16 @@
 												</td>
 
 												<td>
-													18374283492365
+													1837428349236
 												</td>
 												<td>450</td>
 												<td class="hidden-480">2020-10-09</td>
 												<td class="hidden-480">2020-10-10</td>
-												<td>小白</td>
-												<td class="hidden-480">
-													<span>18765478933</span>
-												</td>
+												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
 												<td>一居室</td>
+												<td>已完成</td>
 												<td>
-													<button class="btn btn-sm btn-success" @click="detailShow">确认入住</button>
-													<button class="btn btn-sm btn-danger">到点未入住</button>
+													<button class="btn btn-sm btn-success" @click="detailShow">详细信息</button>
 												</td>
 
 											</tr>
@@ -718,7 +714,6 @@
 													</div>
 
 													<div class="col-xs-12 col-sm-6">
-														<form>
 														<div class="space visible-xs"></div>
 
 														<div class="profile-user-info profile-user-info-striped">
@@ -731,28 +726,33 @@
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name text-center"> 消费码 </div>
+																<div class="profile-info-name text-center"> 入住人 </div>
 																<div class="profile-info-value text-center">
-																	<span><input type="text" placeholder="消费码" class="col-xs-12"></span>
+																	<span>小白</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name text-center"> 房客省份证 </div>
+																<div class="profile-info-name"> 联系方式 </div>
 																<div class="profile-info-value text-center">
-																	<span><input type="text" placeholder="身份证号码" class="col-xs-12"></span>
+																	<span>18765478933</span>
+																</div>
+															</div>
+
+															<div class="profile-info-row">
+																<div class="profile-info-name text-center"> 下单时间 </div>
+																<div class="profile-info-value text-center">
+																	<span>2020-10-07 18:34:53</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
 																<div class="profile-info-name text-center"></div>
 																<div class="profile-info-value text-center">
-																	<button class="btn btn-success btn-sm" @click="detailClose">入住</button>
 																	<button class="btn btn-danger btn-sm" @click="detailClose">关闭</button>
 																</div>
 															</div>
 														</div>
-														</form>
 													</div>
 
 													<div class="col-xs-12 col-sm-3">
@@ -761,7 +761,6 @@
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 								<!-- PAGE CONTENT ENDS 自己写的内容 -->
@@ -829,6 +828,6 @@
 
 		<!-- vue -->
 		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderW06.js"></script>
+		<script src="assets/js/tuo/orderW01.js"></script>
 	</body>
 </html>

@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>订单管理-退款</title>
+		<title>订单管理-查询订单</title>
 
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -406,19 +406,19 @@
 				<ul class="nav nav-list">
 
 					<li class="">
-						<a href="ordinary.html">
+						<a href="admin.html">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text">仪表盘</span>
 						</a>
 
 						<b class="arrow"></b>
 					</li>
-					<!-- 个人管理-->
+					<!-- 用户管理-->
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-file-o"></i>
 							<span class="menu-text">
-								个人管理
+								用户管理
 							</span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -427,31 +427,134 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-
-							<li class="">
-								<a href="manageself.html">
+							<li>
+								<a href="queryuser.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									修改信息
+									查看用户
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<a href="addmanageuser.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加管理员
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="managepassword.html">
+								<a href="changepermission.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									修改密码
+									修改权限
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 						</ul>
 					</li>
-					<!-- 订单管理模块 -->
+					<!-- 房源管理-->
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-file-o"></i>
+							<span class="menu-text">
+								房源管理
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="housing_review.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									房源审核
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="housing_check.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									查询房源
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					<!-- 评论管理    -->
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-file-o"></i>
+							<span class="menu-text">
+								评论管理
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="comment_check.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									查询评论
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="comment_ban.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									封禁用户评论
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					<!-- 订单管理 -->
 					<li class="active open">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-file-o"></i>
 							<span class="menu-text">
 								订单管理
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="active">
+								<a href="orderW01a.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									查询订单
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="orderW04a.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									退款
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					<!-- 图表管理模块 -->
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bar-chart-o"></i>
+							<span class="menu-text">
+								图表管理
 								<span class="badge badge-primary"></span>
 							</span>
 
@@ -461,35 +564,10 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-
 							<li class="">
-								<a href="orderW01.html">
+								<a href="echartsW02.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									我的订单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="orderW02.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									待支付
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="orderW03.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									待使用
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="active">
-								<a href="orderW04.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									退款
+									利润流水图表
 								</a>
 
 								<b class="arrow"></b>
@@ -497,58 +575,7 @@
 						</ul>
 					</li>
 
-					<!-- 我的心愿单 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								我的心愿单
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="collection.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查看心愿单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 评论 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								我的评论
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="my_comment.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查看评论
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-
-				</ul>
-
-
-				<!-- /.nav-list -->
+				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -569,7 +596,7 @@
 							<li>
 								<a href="#">订单模块</a>
 							</li>
-							<li class="active">退款</li>
+							<li class="active">我的订单</li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 
@@ -685,12 +712,13 @@
 													</label>
 												</th>
 												<th>订单号</th>
-												<th>退款总额</th>
-												<th>入住人</th>
-												<th class="hidden-480">联系方式</th>
+												<th>订单总额</th>
+												<th class="hidden-480">入住时间</th>
+												<th class="hidden-480">离店时间</th>
 												<th>房源</th>
-												<th>类型</th>
-												<th>订单状态</th>
+												<th>订房类型</th>
+												<th>状态</th>
+												<th>操作</th>
 											</tr>
 											</thead>
 
@@ -704,40 +732,18 @@
 												</td>
 
 												<td>
-													18374283492365
+													1837428349236
 												</td>
 												<td>450</td>
-												<td>小白</td>
-												<td class="hidden-480">
-													<span>18765478933</span>
-												</td>
+												<td class="hidden-480">2020-10-09</td>
+												<td class="hidden-480">2020-10-10</td>
 												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
 												<td>一居室</td>
+												<td>已完成</td>
 												<td>
-													<span class="label label-lg label-warning">退款中</span>
-												</td>
-											</tr>
-											<tr>
-												<td class="center">
-													<label class="pos-rel">
-														<input type="checkbox" class="ace" :checked="allCheck"/>
-														<span class="lbl"></span>
-													</label>
+													<button class="btn btn-sm btn-success" @click="detailShow">详细信息</button>
 												</td>
 
-												<td>
-													18374283492365
-												</td>
-												<td>450</td>
-												<td>小白</td>
-												<td class="hidden-480">
-													<span>18765478933</span>
-												</td>
-												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
-												<td>一居室</td>
-												<td>
-													<span class="label label-lg label-success">退款成功</span>
-												</td>
 											</tr>
 											</tbody>
 										</table>
@@ -766,72 +772,60 @@
 												</ul>
 											</div>
 										</div>
+
 										<!-- 详情页 -->
-										<div class="col-sm-12" v-show="false">
+										<div class="col-sm-12" v-show="detailFlag">
 											<div class="table-detail">
 												<div class="row">
-													<div class="col-xs-12 col-sm-2">
+													<div class="col-xs-12 col-sm-3">
 														<div class="text-center">
 															<!-- 内容居中 -->
 														</div>
 													</div>
 
-													<div class="col-xs-12 col-sm-8">
+													<div class="col-xs-12 col-sm-6">
 														<div class="space visible-xs"></div>
 
 														<div class="profile-user-info profile-user-info-striped">
-															<div class="profile-info-row">
-																<div class="profile-info-name"> Username </div>
 
-																<div class="profile-info-value">
-																	<span>alexdoe</span>
+															<div class="profile-info-row">
+																<div class="profile-info-name text-center"> 订单号 </div>
+																<div class="profile-info-value text-center">
+																	<span>1837428349236</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Location </div>
-
-																<div class="profile-info-value">
-																	<i class="fa fa-map-marker light-orange bigger-110"></i>
-																	<span>Netherlands, Amsterdam</span>
+																<div class="profile-info-name text-center"> 入住人 </div>
+																<div class="profile-info-value text-center">
+																	<span>小白</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Age </div>
-
-																<div class="profile-info-value">
-																	<span>38</span>
+																<div class="profile-info-name"> 联系方式 </div>
+																<div class="profile-info-value text-center">
+																	<span>18765478933</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Joined </div>
-
-																<div class="profile-info-value">
-																	<span>2010/06/20</span>
+																<div class="profile-info-name text-center"> 下单时间 </div>
+																<div class="profile-info-value text-center">
+																	<span>2020-10-07 18:34:53</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Last Online </div>
-
-																<div class="profile-info-value">
-																	<span>3 hours ago</span>
-																</div>
-															</div>
-
-															<div class="profile-info-row">
-																<div class="profile-info-name"> About Me </div>
-
-																<div class="profile-info-value">
-																	<span>Bio</span>
+																<div class="profile-info-name text-center"></div>
+																<div class="profile-info-value text-center">
+																	<button class="btn btn-danger btn-sm" @click="detailClose">关闭</button>
 																</div>
 															</div>
 														</div>
 													</div>
 
-													<div class="col-xs-12 col-sm-2">
+													<div class="col-xs-12 col-sm-3">
 
 													</div>
 												</div>
@@ -904,6 +898,6 @@
 
 		<!-- vue -->
 		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderWcommon.js"></script>
+		<script src="assets/js/tuo/orderW01.js"></script>
 	</body>
 </html>

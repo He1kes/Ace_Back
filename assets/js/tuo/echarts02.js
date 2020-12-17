@@ -6,23 +6,33 @@ var myChart02 = echarts.init(document.getElementById('businessesEcharts02'));
 // 指定图表的配置项和数据
 var option01 = {
     title: {
-        text: '月度收入流水'
+        text: '平台月入流水'
+    },
+    legend:{
+        data:["月入流水"],
+        right:'10%'
     },
     tooltip: {},
     xAxis: {
+        name:'（月份）',
         data: ["1","2","3","4","5","6","7","8","9","10","11","12"]
     },
-    yAxis: {},
+    yAxis: {
+        name:'（元）'
+    },
     series: [{
-        name: '月度收入',
+        name: '月入流水',
         type: 'line',
-        data: [535010,203020,365030,103040,104050,203060,342070,345080,459090,343100,86610,566120]
+        label:{
+            show:true
+        },
+        data: [535010,203020,365030,103040,124050,203060,342070,365080,459090,343100,86610,566120]
     }]
 };
 
 var option02 = {
     title: {
-        text: '每月热租地区',
+        text: '上月热租地区占比（前五地区）',
         left: 'center'
     },
     tooltip: {
@@ -30,7 +40,7 @@ var option02 = {
     },
     series: [
         {
-            name: '每月热租地区占比',
+            name: '上月热租地区',
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],

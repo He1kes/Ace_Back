@@ -6,31 +6,40 @@ var myChart02 = echarts.init(document.getElementById('businessesEcharts02'));
 // 指定图表的配置项和数据
 var option01 = {
     title: {
-        text: '月度收入折线图'
+        text: '房租月收益折线图'
+    },
+    legend:{
+        data:["房租月收益额"],
+        right:'10%'
     },
     tooltip: {},
     xAxis: {
+        name:'（月份）',
         data: ["1","2","3","4","5","6","7","8","9","10","11","12"]
     },
-    yAxis: {},
+    yAxis: {
+        name:'（元）'
+    },
     series: [{
-        name: '房租收益额',
+        name: '房租月收益额',
         type: 'line',
+        label:{
+            show:true,
+            position:'top'
+        },
         data: [535,203,365,103,104,203,342,345,459,343,866,566]
     }]
 };
 
 var option02 = {
     title: {
-        text: '年度每月收入占比',
+        text: '年度月收益占比',
         left: 'center'
     },
-    tooltip: {
-
-    },
+    tooltip: {},
     series: [
         {
-            name: '每月收入占比',
+            name: '每月收益',
             type: 'pie',
             radius: '55%',
             center: ['50%', '50%'],

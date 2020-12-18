@@ -483,6 +483,14 @@
 
                         <b class="arrow"></b>
                     </li>
+                    <li class="">
+                        <a href="housing_active.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            帮扶活动
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
                 </ul>
             </li>
             <!-- 评论管理    -->
@@ -683,16 +691,22 @@
 
                             <!-- 搜索框 -->
                             <div class="col-xs-6">
-                                <form>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control search-query" placeholder="Type your query" />
-                                        <span class="input-group-btn">
-													<button type="button" class="btn btn-purple btn-sm" style="background-color: #2A91D8">
-													<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-													查询
-													</button>
-											</span>
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="按用户名查找">
                                     </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="按房源查找">
+                                    </div>
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="">评论状态</label>-->
+<!--                                        <select name="" id="">-->
+<!--                                            <option value="0" selected="selected">请选择</option>-->
+<!--                                            <option value="1">正常</option>-->
+<!--                                            <option value="2">不合法</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+                                    <button type="button" class="btn btn-purple btn-sm">查询</button>
                                 </form>
                             </div>
 
@@ -712,12 +726,9 @@
                                                 <span class="lbl"></span>
                                             </label>
                                         </th>
-                                        <th>房源id</th>
-                                        <th>用户名称</th>
-                                        <!--                                            <th class="hidden-480">入住时间</th>-->
-                                        <!--                                            <th class="hidden-480">离店时间</th>-->
+                                        <th>房源名</th>
+                                        <th>用户名</th>
                                         <th>评论时间</th>
-<!--                                        <th class="hidden-480">联系方式</th>-->
                                         <th>评论内容</th>
                                         <th>操作</th>
                                     </tr>
@@ -732,20 +743,12 @@
                                             </label>
                                         </td>
 
-                                        <td>
-                                            1
-                                        </td>
+                                        <td>大罗天·仙王府</td>
                                         <td>吴婷</td>
-                                        <!--                                            <td class="hidden-480">2020-10-09</td>-->
-                                        <!--                                            <td class="hidden-480">2020-10-10</td>-->
                                         <td>2020-12-16</td>
-<!--                                        <td class="hidden-480">-->
-<!--                                            <span>18765478933</span>-->
-<!--                                        </td>-->
                                         <td>九折水瓶？</td>
                                         <td>
                                             <button class="btn btn-sm btn-danger">删除</button>
-<!--                                            <button class="btn btn-sm btn-danger">打回</button>-->
                                         </td>
 
                                     </tr>

@@ -657,11 +657,12 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="text1">房源名</label>
-                                            <input type="text" class="form-control" id="text1" placeholder="房源名">
+                                            <input v-model="housing_name" type="text" class="form-control" id="text1" placeholder="房源名">
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="select">房屋类型</label>
-                                            <select class="form-control" id="select">
+                                            <select class="form-control" id="select" v-model="housing_type">
                                                 <option selected="selected">一室一厅</option>
                                                 <option>两室两厅</option>
                                                 <option>三室一厅</option>
@@ -671,21 +672,21 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="text2">面积(㎡)</label>
-                                            <input type="text" class="form-control" id="text2" placeholder="面积(㎡)">
+                                            <input v-model="housing_area" type="text" class="form-control" id="text2" placeholder="面积(㎡)">
                                         </div>
                                         <div class="form-group">
                                             <label for="text3">租金(元/日)</label>
-                                            <input type="text" class="form-control" id="text3" placeholder="租金(元/日)">
+                                            <input v-model="housing_rent" type="text" class="form-control" id="text3" placeholder="租金(元/日)">
                                         </div>
                                         <div class="form-group">
                                             <label for="province">城市</label>
-                                            <select name="" id="province"></select>
-                                            <select name="" id="city"></select>
-                                            <select name="" id="area"></select>
+                                            <select v-model="province" name="" id="province"></select>
+                                            <select v-model="city" name="" id="city"></select>
+                                            <select v-model="area" name="" id="area"></select>
                                         </div>
                                         <div class="form-group">
                                             <label for="text8">地址</label>
-                                            <input type="text" class="form-control" id="text8" placeholder="地址">
+                                            <input v-model="address" type="text" class="form-control" id="text8" placeholder="地址">
                                         </div>
                                         <div class="form-group">
                                             <label class="checkbox-inline">
@@ -708,11 +709,16 @@
                                             </label>
                                         </div>
                                         <div class="form-group">
+                                            <label for="text4">描述</label>
+                                            <textarea v-model="housing_describe" name="" id="text4" cols="110" rows="8" placeholder="房屋描述"></textarea>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="exampleInputFile">File input</label>
                                             <input type="file" id="exampleInputFile">
                                             <p class="help-block">Example block-level help text here.</p>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <input type="button" class="btn btn-default" value="Submit" @click="add_house()">
+<!--                                        <button type="submit" class="btn btn-default" @click="add_house()">Submit</button>-->
                                     </form>
                                 </div>
                                 <!-- PAGE CONTENT ENDS 自己写的内容 -->
@@ -786,8 +792,25 @@
     new Vue({
         el:'#app',
         data:{
-
+            housing_name:'',
+            housing_type:'',
+            housing_area:'',
+            housing_rent:'',
+            city:'',
+            province:'',
+            area:'',
+            address:'',
+            label:'',
+            housing_describe:'',
         },
+        methods:{
+            add_house:function () {
+                var that = this;
+                if (that.housing_name != null || that.housing_name != ""){
+
+                }
+            }
+        }
     })
 </script>
 </body>

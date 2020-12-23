@@ -707,7 +707,7 @@
                                             <td><img src="./assets/images/king/bo.png" width="52px" height="33.6px" alt="" data-toggle="modal" data-target=".bs-example-modal-img"></td>
                                             <td>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".bs-example-modal-update">修改</button>
-                                                <button class="btn btn-sm btn-purple">帮扶</button>
+                                                <button class="btn btn-sm btn-purple" data-toggle="modal" data-target=" .bs-example-modal-active">活动</button>
                                                 <button class="btn btn-sm btn-danger">下架</button>
                                             </td>
                                         </tr>
@@ -814,6 +814,75 @@
                                             </div>
                                         </div>
                                         <!-- PAGE CONTENT ENDS 自己写的内容 -->
+                                    </div>
+                                    <div class="modal fade bs-example-modal-active" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-8" style="background-color: whitesmoke">
+                                                    <table class="table table-striped table-bordered table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="center">
+                                                                <label class="pos-rel">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </th>
+                                                            <th>政策</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>限时五折</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>水电半价</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>免押金</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>八折</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>节日推送好去处</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <button style="float: right" class="btn btn-sm btn-success">确定</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
                             </div><!-- /.page-content -->

@@ -8,7 +8,8 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/heikes/jquery-2.1.1.min.js"></script>
+
     <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
@@ -55,13 +56,11 @@
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
     <script src="assets/js/heikes/address.js"></script>
-
     <script type="text/javascript">
         $(function () {
             data();
         })
     </script>
-
 </head>
 
 <body class="no-skin">
@@ -447,7 +446,7 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="active">
+                    <li class="">
                         <a href="housing_add.html">
                             <i class="menu-icon fa fa-caret-right"></i>
                             新增房源
@@ -455,7 +454,7 @@
 
                         <b class="arrow"></b>
                     </li>
-                    <li class="">
+                    <li class="active">
                         <a href="housing_info.html">
                             <i class="menu-icon fa fa-caret-right"></i>
                             我的房源
@@ -465,7 +464,6 @@
                     </li>
                 </ul>
             </li>
-
             <!-- 订单管理模块 -->
             <li class="">
                 <a href="#" class="dropdown-toggle">
@@ -558,6 +556,7 @@
                     </li>
                 </ul>
             </li>
+
         </ul>
 
 
@@ -568,7 +567,7 @@
         </div>
     </div>
 
-    <div class="main-content" style="height: 1000px">
+    <div class="main-content">
         <!-- 这个div不能动,规定位置和线 -->
         <div class="main-content-inner">
             <!-- 自带导航栏 -->
@@ -580,9 +579,9 @@
                     </li>
 
                     <li>
-                        <a href="#">房源管理</a>
+                        <a href="#"></a>
                     </li>
-                    <li class="active">新增</li>
+                    <li class="active"></li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -658,26 +657,36 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS 自己写的内容-->
-
-                            <!-- 表格 -->
-                            <div class="col-xs-12" id="orderTable01">
-                                <h4 class="header smaller lighter blue"></h4>
-                                <!--四个小图标-->
-                                <div class="clearfix">
-                                    <div class="pull-right tableTools-container"></div>
-                                </div>
+                            <!-- 搜索框 -->
+                            <div class="col-xs-6">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="按房源地址查找">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">房源状态</label>
+                                        <select name="" id="">
+                                            <option value="0" selected="selected">请选择</option>
+                                            <option value="1">通过</option>
+                                            <option value="2">待审核</option>
+                                            <option value="3">不通过</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-purple btn-sm">查询</button>
+                                </form>
+                            </div>
+                            <div>
                                 <div class="col-sm-2"></div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-8" style="background-color: whitesmoke">
                                     <form>
                                         <div class="form-group">
                                             <label for="text1">房源名</label>
-                                            <input v-model="housing_name" type="text" class="form-control" id="text1" placeholder="房源名">
-                                            <span style="color: red"></span>
+                                            <input type="text" class="form-control" id="text1" value="大罗天·仙王府">
                                         </div>
                                         <div class="form-group">
                                             <label for="select">房屋类型</label>
-                                            <select class="form-control" id="select" v-model="housing_type">
-                                                <option selected="selected">一室一厅</option>
+                                            <select class="form-control" id="select">
+                                                <option selected="selected">一室两厅</option>
                                                 <option>两室两厅</option>
                                                 <option>三室一厅</option>
                                                 <option>三室两厅</option>
@@ -686,75 +695,99 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="text2">面积(㎡)</label>
-                                            <input v-model="housing_area" type="text" class="form-control" id="text2" placeholder="面积(㎡)">
+                                            <input type="text" class="form-control" id="text2" value="129">
                                         </div>
                                         <div class="form-group">
                                             <label for="text3">租金(元/日)</label>
-                                            <input v-model="housing_rent" type="text" class="form-control" id="text3" placeholder="租金(元/日)">
+                                            <input type="text" class="form-control" id="text3" value="7777">
                                         </div>
                                         <div class="form-group">
                                             <label for="province">城市</label>
-                                            <select v-model="province" name="" id="province"></select>
-                                            <select v-model="city" name="" id="city"></select>
-                                            <select v-model="area" name="" id="area"></select>
+                                            <select name="" id="province"></select>
+                                            <select name="" id="city"></select>
+                                            <select name="" id="area"></select>
                                         </div>
                                         <div class="form-group">
                                             <label for="text8">地址</label>
-                                            <input v-model="address" type="text" class="form-control" id="text8" placeholder="地址">
+                                            <input type="text" class="form-control" id="text8" value="河南省郑州市金水区大黑牛街129号">
                                         </div>
                                         <div class="form-group">
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> 繁华地段
+                                                <input type="checkbox" id="inlineCheckbox1" value="option1" checked="checked"> 繁华地段
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 家电齐全
+                                                <input type="checkbox" id="inlineCheckbox2" value="option2" checked="checked"> 家电齐全
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 拎包入住
+                                                <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked"> 拎包入住
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox4" value="option4"> 交通便利
+                                                <input type="checkbox" id="inlineCheckbox4" value="option4" checked="checked"> 交通便利
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox5" value="option5"> 有wifi
+                                                <input type="checkbox" id="inlineCheckbox5" value="option5" checked="checked"> 有wifi
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox6" value="option6"> 首次出租
+                                                <input type="checkbox" id="inlineCheckbox6" value="option6" checked="checked"> 首次出租
                                             </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="text4">描述</label>
-                                            <textarea v-model="housing_describe" name="" id="text4" cols="110" rows="8" placeholder="房屋描述"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="input-id">File input</label>
                                             <input type="file" id="input-id" multiple data-show-caption="true">
                                             <p class="help-block">Example block-level help text here.</p>
                                         </div>
-                                        <input type="button" class="btn btn-default" value="Submit" @click="add_house()">
-<!--                                        <button type="submit" class="btn btn-default" @click="add_house()">Submit</button>-->
+                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
-                                <!-- PAGE CONTENT ENDS 自己写的内容 -->
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.page-content -->
+                                <div class="modal fade bs-example-modal-img" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <img src="./assets/images/king/bo.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 分页 -->
+                                <div class="col-sm-12">
+                                    <p style="font-size: 15px;float: right">共{{pageActiveTotal}}条记录，当前是{{pageActiveNum}}/{{pageActiveTotal}} 页</p>
+                                </div>
+                                <div class="col-xs-12" align="center">
+                                    <div>
+                                        <ul class="pagination">
+                                            <li class="disabled">
+                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                    <i class="ace-icon fa fa-angle-double-left"></i>
+                                                </a>
+                                            </li>
+
+                                            <li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
+                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div><!-- /.row -->
+                        </div><!-- /.page-content -->
+                    </div><!-- 以上为模板固定结构 -->
                 </div>
-            </div>
-            <!-- 以上为模板固定结构 -->
+            </div><!-- /.main-content -->
 
-        </div><!-- /.main-content -->
-
-        <div class="footer">
-            <div class="footer-inner">
-                <div class="footer-content">
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Ace</span>
 							Application &copy; 2020-2021
 						</span>
 
-                    &nbsp; &nbsp;
-                    <span class="action-buttons">
+                        &nbsp; &nbsp;
+                        <span class="action-buttons">
 							<a href="#">
 								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
 							</a>
@@ -767,22 +800,23 @@
 								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
 							</a>
 						</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-        </a>
-    </div><!-- /.main-container -->
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div><!-- /.main-container -->
+    </div>
 </div>
 <script>
     $(function () {
         initUpload("input-id");
     })
     function initUpload(ctrlName) {
-        var control = $('#'+ctrlName);
-        control.fileinput({
+        var xxx = $('#'+ctrlName);
+        xxx.fileinput({
             language: 'zh', //设置语言
             uploadUrl: "", //上传的地址
             allowedFileExtensions: ['jpg', 'gif', 'png','doc','docx','pdf','ppt','pptx','txt'],//接收的文件后缀
@@ -811,20 +845,18 @@
                 showRemove: true,
                 showZoom:true,
             },
-            layoutTemplates: {
-                // actionDelete: '',
-                // actionUpload: '',
-                // actionZoom: ''
-            }
+            initialPreviewAsData: true,
+            initialPreview:[
+                "./assets/images/king/bo.png"
+            ]
         })
     }
 </script>
-<!-- basic scripts -->
 
+<!-- basic scripts -->
 <!--&lt;!&ndash;[if !IE]> &ndash;&gt;-->
 <!--<script src="assets/js/jquery-2.1.4.min.js"></script>-->
 <!--&lt;!&ndash; <![endif]&ndash;&gt;-->
-
 <!--&lt;!&ndash;[if IE]>-->
 <!--<script src="assets/js/jquery-1.11.3.min.js"></script>-->
 <!--<![endif]&ndash;&gt;-->
@@ -844,30 +876,6 @@
 
 <!-- vue -->
 <script src="assets/js/vue.js"></script>
-<script type="text/javascript">
-    new Vue({
-        el:'#app',
-        data:{
-            housing_name:'',
-            housing_type:'',
-            housing_area:'',
-            housing_rent:'',
-            city:'',
-            province:'',
-            area:'',
-            address:'',
-            label:'',
-            housing_describe:'',
-        },
-        methods:{
-            add_house:function () {
-                var that = this;
-                if (that.housing_name != null || that.housing_name != ""){
-
-                }
-            }
-        }
-    })
-</script>
+<script src="assets/js/heikes/commonDemo.js"></script>
 </body>
 </html>

@@ -685,7 +685,7 @@
 												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
 												<td>一居室</td>
 												<td>
-													<button class="btn btn-sm btn-success" @click="detailShow">确认入住</button>
+													<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">确认入住</button>
 													<button class="btn btn-sm btn-danger">到点未入住</button>
 												</td>
 
@@ -723,7 +723,7 @@
 									</div>
 								</div>
 								<!-- 详情页 -->
-								<div class="col-sm-12" v-show="detailFlag">
+								<div class="col-sm-12" v-show="false">
 									<div class="table-detail">
 										<div class="row">
 											<div class="col-xs-12 col-sm-3">
@@ -843,5 +843,6 @@
 		<!-- vue -->
 		<script src="assets/js/tuo/vue.js"></script>
 		<script src="assets/js/tuo/orderW06.js"></script>
+
 	</body>
 </html>

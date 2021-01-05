@@ -48,7 +48,9 @@ var app = new Vue({
         searchComment:function () {
             axios.get(hIp+"/comment/allComment?pageNum=1&pageSize=5&userName="+app.userName+"&houseName="+app.houseName).then(function (value) {
                 app.commentList = value.data.data.list;
-                console.log(app.commentList)
+                app.nagiList = value.data.data.navigatepageNums;
+                app.pages = value.data.data.pages;
+                app.total = value.data.data.total;
             })
         }
     }

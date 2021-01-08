@@ -636,9 +636,17 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS 自己写的内容-->
 								<div class="col-xs-6">
-									<div id="businessesEcharts01" style="width: 600px;height:400px;"></div>
+									<div id="businessesEchartsDiv01">
+										<div style="margin: 10px 0px">
+											<strong>请选择展示年份/月份：</strong>
+											<select class="year" name="year" style="width: 150px;height: 40px"></select>
+											<select class="month" name="month" style="width: 150px;height: 40px"></select>
+											<button id="selectYearMonth" class="btn btn-success">确定</button>
+										</div>
+										<div id="businessesEcharts01" style="width: 600px;height:400px;"></div>
+									</div>
 								</div>
-								<div class="col-xs-6">
+								<div class="col-xs-6" style="margin-top: 40px">
 									<div id="businessesEcharts02" style="width: 600px;height:400px;"></div>
 								</div>
 								<!-- PAGE CONTENT ENDS 自己写的内容 -->
@@ -706,7 +714,6 @@
 
 		<!-- vue -->
 		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderWcommon.js"></script>
 
 		<!-- Echats -->
 		<script src="assets/js/tuo/echarts.min.js"></script>

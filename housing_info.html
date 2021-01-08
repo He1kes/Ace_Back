@@ -8,6 +8,18 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- 主要的 fileinput 插件库 -->
+    <script src="assets/js/fileinput.min.js"></script>
+    <!-- 如果你想在放大的模态页面中查看文件详细信息需要引入bootstrap.js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- 可选，如果你需要像font awesome 这样的主题，就像下面的代码一样引入它;-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <!-- 可选，如果你需要转换语言或翻译，就包含这个库 -->
+    <script src="assets/js/zh.js"></script>
+
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -42,7 +54,6 @@
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
     <script src="assets/js/heikes/address.js"></script>
-    <script src="assets/js/heikes/jquery-3.5.1.js"></script>
     <script type="text/javascript">
         $(function () {
             data();
@@ -706,8 +717,8 @@
                                             <td>室内装修风格给人两袖清风,淡淡的节奏,空灵的曲调,使人犹如置身仙境之中</td>
                                             <td><img src="./assets/images/king/bo.png" width="52px" height="33.6px" alt="" data-toggle="modal" data-target=".bs-example-modal-img"></td>
                                             <td>
-                                                <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".bs-example-modal-update">修改</button>
-                                                <button class="btn btn-sm btn-purple">帮扶</button>
+                                                <button class="btn btn-sm btn-success" @click="update()">修改</button>
+                                                <button class="btn btn-sm btn-purple" data-toggle="modal" data-target=" .bs-example-modal-active">活动</button>
                                                 <button class="btn btn-sm btn-danger">下架</button>
                                             </td>
                                         </tr>
@@ -804,8 +815,8 @@
                                                             </label>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputFile">File input</label>
-                                                            <input type="file" id="exampleInputFile">
+                                                            <label for="input-id">File input</label>
+                                                            <input type="file" id="input-id" multiple data-show-caption="true">
                                                             <p class="help-block">Example block-level help text here.</p>
                                                         </div>
                                                         <button type="submit" class="btn btn-default">Submit</button>
@@ -814,6 +825,75 @@
                                             </div>
                                         </div>
                                         <!-- PAGE CONTENT ENDS 自己写的内容 -->
+                                    </div>
+                                    <div class="modal fade bs-example-modal-active" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-8" style="background-color: whitesmoke">
+                                                    <table class="table table-striped table-bordered table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="center">
+                                                                <label class="pos-rel">
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </th>
+                                                            <th>政策</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>限时五折</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>水电半价</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>免押金</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>八折</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center">
+                                                                <label class="pos-rel">
+                                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </td>
+                                                            <td>节日推送好去处</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <button style="float: right" class="btn btn-sm btn-success">确定</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
                             </div><!-- /.page-content -->
@@ -853,13 +933,10 @@
         </div><!-- /.main-container -->
     </div>
 </div>
-
 <!-- basic scripts -->
-
 <!--[if !IE]> -->
 <script src="assets/js/jquery-2.1.4.min.js"></script>
 <!-- <![endif]-->
-
 <!--[if IE]>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
@@ -880,5 +957,15 @@
 <!-- vue -->
 <script src="assets/js/vue.js"></script>
 <script src="assets/js/heikes/commonDemo.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        methods:{
+            update:function () {
+                location.href="housing_detail.html";
+            }
+        }
+    })
+</script>
 </body>
 </html>

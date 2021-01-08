@@ -33,7 +33,7 @@ var app = new Vue({
         },
         //查询所有评论
         allComment:function () {
-            axios.get(hIp+"/comment/allComment?pageNum=1&pageSize=5").then(function (value) {
+            axios.get(commentIp+"/back/allComment?pageNum=1&pageSize=5").then(function (value) {
                 app.commentList = value.data.data.list;
                 app.nagiList = value.data.data.navigatepageNums;
                 app.pages = value.data.data.pages;
@@ -42,11 +42,11 @@ var app = new Vue({
         },
         //删除评论
         deleteComment:function (id) {
-            axios.get(hIp+"/comment/deleteComment?id="+id);
+            axios.get(commentIp+"/back/deleteComment?id="+id);
         },
         //条件查询
         searchComment:function () {
-            axios.get(hIp+"/comment/allComment?pageNum=1&pageSize=5&userName="+app.userName+"&houseName="+app.houseName).then(function (value) {
+            axios.get(commentIp+"/back/allComment?pageNum=1&pageSize=5&userName="+app.userName+"&houseName="+app.houseName).then(function (value) {
                 app.commentList = value.data.data.list;
                 app.nagiList = value.data.data.navigatepageNums;
                 app.pages = value.data.data.pages;

@@ -671,64 +671,68 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="text1">房源名</label>
-                                            <input v-model="housing_name" type="text" class="form-control" id="text1" placeholder="房源名">
+                                            <input v-model="info.housing_name" type="text" class="form-control" id="text1" placeholder="房源名">
                                             <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="select">房屋类型</label>
-                                            <select class="form-control" id="select" v-model="housing_type">
-                                                <option selected="selected">一室一厅</option>
-                                                <option>两室两厅</option>
-                                                <option>三室一厅</option>
-                                                <option>三室两厅</option>
-                                                <option>一室零厅</option>
+                                            <select class="form-control" id="select" v-model="info.housing_type">
+                                                <option v-for="t in typeList" v-text="t.houseTypeName" :value="t.id"></option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="text2">面积(㎡)</label>
-                                            <input v-model="housing_area" type="text" class="form-control" id="text2" placeholder="面积(㎡)">
+                                            <input v-model="info.housing_area" type="text" class="form-control" id="text2" placeholder="面积(㎡)">
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="text3">租金(元/日)</label>
-                                            <input v-model="housing_rent" type="text" class="form-control" id="text3" placeholder="租金(元/日)">
+                                            <input v-model="info.housing_rent" type="text" class="form-control" id="text3" placeholder="租金(元/日)">
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="province">城市</label>
-                                            <select v-model="province" name="" id="province"></select>
-                                            <select v-model="city" name="" id="city"></select>
-                                            <select v-model="area" name="" id="area"></select>
+                                            <select v-model="info.province" name="" id="province"></select>
+                                            <select v-model="info.city" name="" id="city"></select>
+                                            <select v-model="info.region" name="" id="area"></select>
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="text8">地址</label>
-                                            <input v-model="address" type="text" class="form-control" id="text8" placeholder="地址">
+                                            <input v-model="info.address" type="text" class="form-control" id="text8" placeholder="地址">
+                                            <input type="hidden" v-model="info.lat" id="latitude" value="">
+                                            <input type="hidden" v-model="info.lng" id="longitude" value="">
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox1" value="option1"> 繁华地段
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="繁华地段"> 繁华地段
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox2" value="option2"> 家电齐全
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="家电齐全"> 家电齐全
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox3" value="option3"> 拎包入住
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="拎包入住"> 拎包入住
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox4" value="option4"> 交通便利
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="交通便利"> 交通便利
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox5" value="option5"> 有wifi
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="有wifi"> 有wifi
                                             </label>
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" id="inlineCheckbox6" value="option6"> 首次出租
+                                                <input type="checkbox" v-model="info.label" id="inlineCheckbox" value="首次出租"> 首次出租
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label for="text4">描述</label>
-                                            <textarea v-model="housing_describe" name="" id="text4" cols="110" rows="8" placeholder="房屋描述"></textarea>
+                                            <textarea v-model="info.housing_describe" name="" id="text4" cols="110" rows="8" placeholder="房屋描述"></textarea>
+                                            <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="input-id">File input</label>
-                                            <input type="file" id="input-id" multiple data-show-caption="true">
+                                            <input type="file" id="input-id" multiple data-show-caption="true" @change="file($event)">
+                                            <span style="color: red"></span>
                                             <p class="help-block">Example block-level help text here.</p>
                                         </div>
                                         <input type="button" class="btn btn-default" value="Submit" @click="add_house()">
@@ -744,33 +748,6 @@
             <!-- 以上为模板固定结构 -->
 
         </div><!-- /.main-content -->
-
-        <div class="footer">
-            <div class="footer-inner">
-                <div class="footer-content">
-						<span class="bigger-120">
-							<span class="blue bolder">Ace</span>
-							Application &copy; 2020-2021
-						</span>
-
-                    &nbsp; &nbsp;
-                    <span class="action-buttons">
-							<a href="#">
-								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-							</a>
-						</span>
-                </div>
-            </div>
-        </div>
-
         <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
             <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
         </a>
@@ -841,30 +818,152 @@
 
 <!-- inline scripts related to this page -->
 
+<!--<script src="assets/js/heikes/jquery-3.5.1.js"></script>-->
+<script type="text/javascript">
+    $(function () {
+        $("#text8").blur(function () {
+            var address = $("#text8").val();
+            $.ajax({
+                url:"http://api.map.baidu.com/geocoding/v3/?address="+address+
+                    "&output=json&ak=QqQm1BAIylVGcExlKZHSrS3TGQXSEUD5&callback=showLocation",
+                dataType:'jsonp',
+                //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                jsonp: "callback",
+                //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                jsonpCallback:"success",
+                success:function (data) {
+                    $("#latitude").val(data.result.location.lat);
+                    $("#longitude").val(data.result.location.lng);
+                }
+            })
+        })
+    })
+</script>
 
 <!-- vue -->
+<script src="assets/js/Hip.js"></script>
 <script src="assets/js/vue.js"></script>
+<script src="assets/js/axios.min.js"></script>
 <script type="text/javascript">
-    new Vue({
+    var app = new Vue({
         el:'#app',
         data:{
-            housing_name:'',
-            housing_type:'',
-            housing_area:'',
-            housing_rent:'',
-            city:'',
-            province:'',
-            area:'',
-            address:'',
-            label:'',
-            housing_describe:'',
+            info:{
+                housing_name:'',
+                housing_type:'1',
+                housing_area:'',
+                housing_rent:'',
+                city:'',
+                province:'',
+                region:'',
+                address:'',
+                label:[],
+                housing_describe:'',
+                lat:'',
+                lng:'',
+                id:'1346294511432753152'
+            },
+            imgName:[],
+            typeList:[],
+            tips:''
+        },
+        mounted:function(){
+            this.houseType();
         },
         methods:{
-            add_house:function () {
-                var that = this;
-                if (that.housing_name != null || that.housing_name != ""){
-
+            fileClick() {
+                document.getElementById('input-id').click();
+            },
+            getFile(event) {
+                for (var i = 0 ;i < event.target.files.length;i++){
+                    this.imgName.push(event.target.files[i]);
                 }
+            },
+            file(event) {
+                this.getFile(event);
+            },
+            //新增房源
+            add_house:function () {
+                // if (app.info.housing_name == null || app.info.housing_name == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.housing_area == null || app.info.housing_area == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.housing_rent == null || app.info.housing_rent == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.province == null || app.info.province == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.city == null || app.info.city == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.region == null || app.info.region == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.address == null || app.info.address == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.housing_describe == null || app.info.housing_describe == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.imgName == null || app.info.imgName == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                // if (app.info.label == null || app.info.label == ""){
+                //     app.tips = "不能为空";
+                //     return ;
+                // }
+                var forms = new FormData();
+                for (let i = 0; i < app.imgName.length; i++) {
+                    forms.append("file",app.imgName[i]);
+                }
+                forms.append("estateName",app.info.housing_name);
+                forms.append("houseType",app.info.housing_type);
+                forms.append("area",app.info.housing_area);
+                forms.append("rent",app.info.housing_rent);
+                var param = [];
+                param.push(app.info.province);
+                param.push(app.info.city);
+                param.push(app.info.region);
+                forms.append("address",param);
+                forms.append("lot",app.info.address);
+                forms.append("label",app.info.label);
+                forms.append("lat",app.info.lat);
+                console.log(app.info.lat)
+                forms.append("lng",app.info.lng);
+                forms.append("desc",app.info.housing_describe);
+                forms.append("landlordId",localStorage.getItem())
+                const config = {
+                    headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
+                };
+
+                //form.append("houseInfo",app.info)
+                axios.post(houseIp+"/back/addHouseInfo?module=house",forms,config);
+                // axios({
+                //     method: 'post',
+                //     url: houseIp+"/back/addHouseInfo?module=house",
+                //     data: forms,
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data'
+                //     }
+                // })
+            },
+            //获取房屋类型
+            houseType:function () {
+                axios.get(typeIp+"/font/public/allHouseType").then(function (value) {
+                    app.typeList = value.data.data;
+                 })
             }
         }
     })

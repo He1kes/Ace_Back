@@ -35,10 +35,12 @@ const login = new Vue({
                                 if (result.data.data[3] == 3) {//等于3则判断为商户登录
                                     localStorage.setItem('token',result.data.data[1]);
                                     localStorage.setItem('userId', result.data.data[2]);
+                                    localStorage.setItem('roleId', result.data.data[3]);
                                     window.location.href = 'businesses.html';
                                 } else { //否则为管理员登录
                                     localStorage.setItem('token',result.data.data[1]);
                                     localStorage.setItem('userId', result.data.data[2]);
+                                    localStorage.setItem('roleId', result.data.data[3]);
                                     window.location.href = 'admin.html';
                                 }
                             }
@@ -98,7 +100,8 @@ const resetPassword = new Vue({
                         if (result.data.data == true) {
                             that.resetMessage = '';
                             that.resetFlag = false;
-                            this.clearForm();
+                            that.clearForm();
+                            document.getElementById('backLogin').click();
                             alert('密码已重置为000000，请在登录后及时更改！');
                         } else {
                             that.resetMessage = result.data.message;

@@ -32,16 +32,20 @@ const login = new Vue({
                                 this.loginFlag = true;
                                 this.loginMessage = result.data.message;
                             } else {
-                                if (result.data.data[3] == 3) {//等于3则判断为商户登录
-                                    localStorage.setItem('token',result.data.data[1]);
-                                    localStorage.setItem('userId', result.data.data[2]);
-                                    localStorage.setItem('roleId', result.data.data[3]);
-                                    window.location.href = 'businesses.html';
-                                } else { //否则为管理员登录
-                                    localStorage.setItem('token',result.data.data[1]);
-                                    localStorage.setItem('userId', result.data.data[2]);
-                                    localStorage.setItem('roleId', result.data.data[3]);
-                                    window.location.href = 'admin.html';
+                                if (result.data.data[0] == 1) {
+                                    if (result.data.data[3] == 3) {//等于3则判断为商户登录
+                                        localStorage.setItem('token',result.data.data[1]);
+                                        localStorage.setItem('userId', result.data.data[2]);
+                                        localStorage.setItem('roleId', result.data.data[3]);
+                                        window.location.href = 'businesses.html';
+                                    } else { //否则为管理员登录
+                                        localStorage.setItem('token',result.data.data[1]);
+                                        localStorage.setItem('userId', result.data.data[2]);
+                                        localStorage.setItem('roleId', result.data.data[3]);
+                                        window.location.href = 'admin.html';
+                                    }
+                                } else {
+                                    alert("该用户已被封禁，请联系上级管理员解除！");
                                 }
                             }
                         }

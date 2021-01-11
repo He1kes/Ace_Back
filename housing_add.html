@@ -700,8 +700,6 @@
                                         <div class="form-group">
                                             <label for="text8">地址</label>
                                             <input v-model="info.address" type="text" class="form-control" id="text8" placeholder="地址">
-                                            <input type="hidden" v-model="info.lat" id="latitude" value="">
-                                            <input type="hidden" v-model="info.lng" id="longitude" value="">
                                             <span style="color: red"></span>
                                         </div>
                                         <div class="form-group">
@@ -832,8 +830,8 @@
                 //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
                 jsonpCallback:"success",
                 success:function (data) {
-                    $("#latitude").val(data.result.location.lat);
-                    $("#longitude").val(data.result.location.lng);
+                    app.info.lat = data.result.location.lat
+                    app.info.lng = data.result.location.lng
                 }
             })
         })
@@ -940,24 +938,16 @@
                 forms.append("lot",app.info.address);
                 forms.append("label",app.info.label);
                 forms.append("lat",app.info.lat);
-                console.log(app.info.lat)
                 forms.append("lng",app.info.lng);
                 forms.append("desc",app.info.housing_describe);
-                forms.append("landlordId",localStorage.getItem())
+                forms.append("landlordId",1);
+
                 const config = {
                     headers: { "Content-Type": "multipart/form-data;boundary="+new Date().getTime() }
                 };
 
-                //form.append("houseInfo",app.info)
                 axios.post(houseIp+"/back/addHouseInfo?module=house",forms,config);
-                // axios({
-                //     method: 'post',
-                //     url: houseIp+"/back/addHouseInfo?module=house",
-                //     data: forms,
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data'
-                //     }
-                // })
+                // axios.post("http://192.168.0.7:6603/info/back/addHouseInfo?moudule=house",forms,config);
             },
             //获取房屋类型
             houseType:function () {

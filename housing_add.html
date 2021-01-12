@@ -412,7 +412,7 @@
                                         <div class="form-group">
                                             <label for="text1">房源名</label>
                                             <input v-model="info.housing_name" type="text" class="form-control" id="text1" placeholder="房源名">
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="select">房屋类型</label>
@@ -423,24 +423,24 @@
                                         <div class="form-group">
                                             <label for="text2">面积(㎡)</label>
                                             <input v-model="info.housing_area" type="text" class="form-control" id="text2" placeholder="面积(㎡)">
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="text3">租金(元/日)</label>
                                             <input v-model="info.housing_rent" type="text" class="form-control" id="text3" placeholder="租金(元/日)">
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="province">城市</label>
                                             <select v-model="info.province" name="" id="province"></select>
                                             <select v-model="info.city" name="" id="city"></select>
                                             <select v-model="info.region" name="" id="area"></select>
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="text8">地址</label>
                                             <input v-model="info.address" type="text" class="form-control" id="text8" placeholder="地址">
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label class="checkbox-inline">
@@ -465,12 +465,12 @@
                                         <div class="form-group">
                                             <label for="text4">描述</label>
                                             <textarea v-model="info.housing_describe" name="" id="text4" cols="110" rows="8" placeholder="房屋描述"></textarea>
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="input-id">File input</label>
                                             <input type="file" id="input-id" multiple data-show-caption="true" @change="file($event)">
-                                            <span style="color: red"></span>
+                                            <span style="color: red" v-text="tips"></span>
                                             <p class="help-block">Example block-level help text here.</p>
                                         </div>
                                         <input type="button" class="btn btn-default" value="Submit" @click="add_house()">
@@ -503,7 +503,7 @@
             allowedFileExtensions: ['jpg', 'gif', 'png','doc','docx','pdf','ppt','pptx','txt'],//接收的文件后缀
             maxFilesNum : 5,//上传最大的文件数量
             uploadAsync: true, //默认异步上传
-            showUpload: true, //是否显示上传按钮
+            showUpload: false, //是否显示上传按钮
             showRemove : true, //显示移除按钮
             showPreview : true, //是否显示预览
             showCaption: true,//是否显示标题
@@ -622,49 +622,49 @@
             },
             //新增房源
             add_house:function () {
-                // if (app.info.housing_name == null || app.info.housing_name == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.housing_area == null || app.info.housing_area == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.housing_rent == null || app.info.housing_rent == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.province == null || app.info.province == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.city == null || app.info.city == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.region == null || app.info.region == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.address == null || app.info.address == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.housing_describe == null || app.info.housing_describe == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.imgName == null || app.info.imgName == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
-                // if (app.info.label == null || app.info.label == ""){
-                //     app.tips = "不能为空";
-                //     return ;
-                // }
+                if (app.info.housing_name == null || app.info.housing_name == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.housing_area == null || app.info.housing_area == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.housing_rent == null || app.info.housing_rent == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.province == null || app.info.province == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.city == null || app.info.city == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.region == null || app.info.region == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.address == null || app.info.address == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.housing_describe == null || app.info.housing_describe == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.imgName == null || app.imgName == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
+                if (app.info.label == null || app.info.label == ""){
+                    app.tips = "不能为空";
+                    return ;
+                }
                 var forms = new FormData();
                 for (let i = 0; i < app.imgName.length; i++) {
-                    forms.append("file",app.imgName[i]);
+                    forms.append("files",app.imgName[i]);
                 }
                 forms.append("estateName",app.info.housing_name);
                 forms.append("houseType",app.info.housing_type);

@@ -451,44 +451,61 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS 自己写的内容-->
+                            <!--感谢使用-->
                             <div class="text-center" style="margin: 10px 0px;background-color: #dff0d8;width: auto;border-radius: 5px">
                                 <p style="height: 60px;line-height:60px;font-size: 20px;color: #447a48;">感谢选择 <strong>轻松短租网</strong>，用心做短租。</p>
                             </div>
-
-                            <div class="col-xs-12" style="margin: 10px 0px;">
-                                <div class="col-xs-3"></div>
-                                <div class="col-xs-3 text-center">
-                                    <div style="overflow: hidden;">
-                                        <p style="float:left; width: 120px;height: 80px;background-color: #2e6da4;color: white;line-height: 80px;font-size: 20px">普通用户</p>
-                                        <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>126378人</strong></p>
+                            <div id="kshContent">
+                                <!--第一行可视化数据-->
+                                <div class="col-xs-12" style="margin: 10px 0px;">
+                                    <div class="col-xs-3"></div>
+                                    <div class="col-xs-3 text-center">
+                                        <div style="overflow: hidden;">
+                                            <p style="float:left; width: 120px;height: 80px;background-color: #2e6da4;color: white;line-height: 80px;font-size: 20px">普通用户</p>
+                                            <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>12人</strong></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-3 text-center">
-                                    <div style="overflow: hidden;">
-                                        <p style="float:left; width: 120px;height: 80px;background-color: yellowgreen;color: white;line-height: 80px;font-size: 20px">入驻房东</p>
-                                        <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>67874人</strong></p>
+                                    <div class="col-xs-3 text-center">
+                                        <div style="overflow: hidden;">
+                                            <p style="float:left; width: 120px;height: 80px;background-color: yellowgreen;color: white;line-height: 80px;font-size: 20px">入驻房东</p>
+                                            <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>6人</strong></p>
+                                        </div>
                                     </div>
+                                    <div class="col-xs-3"></div>
                                 </div>
-                                <div class="col-xs-3"></div>
+                                <!--第二行可视化数据-->
+                                <div class="col-xs-12" style="margin: 10px 0px;">
+                                    <div class="col-xs-3"></div>
+                                    <div class="col-xs-3 text-center">
+                                        <div style="overflow: hidden;">
+                                            <p style="float:left; width: 120px;height: 80px;background-color: #ff5151;color: white;line-height: 80px;font-size: 20px">完成订单数</p>
+                                            <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>{{orderCounts}}单</strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 text-center">
+                                        <div style="overflow: hidden;">
+                                            <p style="float:left; width: 120px;height: 80px;background-color: #ff8040;color: white;line-height: 80px;font-size: 20px">累计成交额</p>
+                                            <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>{{orderMoney}}元</strong></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3"></div>
+                                </div>
                             </div>
-
-                            <div class="col-xs-12" style="margin: 10px 0px;">
-                                <div class="col-xs-3"></div>
-                                <div class="col-xs-3 text-center">
-                                    <div style="overflow: hidden;">
-                                        <p style="float:left; width: 120px;height: 80px;background-color: #ff5151;color: white;line-height: 80px;font-size: 20px">完成订单数</p>
-                                        <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>34789单</strong></p>
+                            <!--图表-->
+                            <div class="col-xs-12" style="margin-top: 50px;">
+                                <!--日入收益-->
+                                <div class="col-xs-6">
+                                    <div id="businessesEchartsDiv01">
+                                        <div id="businessesEcharts01" style="width: 600px;height:400px;"></div>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 text-center">
-                                    <div style="overflow: hidden;">
-                                        <p style="float:left; width: 120px;height: 80px;background-color: #ff8040;color: white;line-height: 80px;font-size: 20px">累计成交额</p>
-                                        <p style="float:left; width: 150px;height: 80px;border: #aaaaaa 1px solid;line-height: 80px;font-size: 20px"><strong>1678905元</strong></p>
+                                <!--月入收益-->
+                                <div class="col-xs-6">
+                                    <div id="businessesEchartsDiv02">
+                                        <div id="businessesEcharts02" style="width: 600px;height:400px;"></div>
                                     </div>
                                 </div>
-                                <div class="col-xs-3"></div>
                             </div>
-
                             <!-- PAGE CONTENT ENDS 自己写的内容 -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -550,14 +567,17 @@
 
 <!-- inline scripts related to this page -->
 
+    <!--txq-->
+    <script src="assets/js/tuo/vue.js"></script>
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/txq/commons.js"></script>
 
-<!-- vue -->
-<script src="assets/js/tuo/vue.js"></script>
+    <!-- Echats -->
+    <script src="assets/js/tuo/echarts.min.js"></script>
+    <script src="assets/js/tuo/echartsAdmin.js"></script>
 
+    <!-- vue -->
+    <script src="assets/js/tuo/admin.js"></script>
 
-
-<!--txq-->
-<script src="assets/js/axios.min.js"></script>
-<script src="assets/js/txq/commons.js"></script>
 </body>
 </html>

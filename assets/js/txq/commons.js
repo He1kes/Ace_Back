@@ -41,3 +41,32 @@ const loginDiv = new Vue({
         this.getUserMessage();
     }
 });
+
+const functions = new Vue({
+    el: '#theFunction',
+    data: {
+        //一级列表
+        level_1: null,
+        //存储二级列表的集合
+        level_2: null
+    },
+    methods: {
+        getFunction() {
+            let that = this;
+            axios({
+                method: 'get',
+                url: txqIp + '/user/function/back/getFunction',
+                headers: {
+                    'token': localStorage.getItem('token')
+                }
+            })
+                .then(function (result) {
+                    that.level_1 = result.data.data[0];
+                    that.level_2 = result.data.data[1];
+                });
+        }
+    },
+    mounted: function () {
+        this.getFunction();
+    }
+});

@@ -144,211 +144,20 @@
                 </div>
             </div><!-- /.sidebar-shortcuts -->
 
-            <ul class="nav nav-list">
-                <li class="">
-                    <a href="admin.html">
-                        <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text">仪表盘</span>
+            <!--功能列表-->
+            <ul id="theFunction" class="nav nav-list">
+                <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='用户管理', open: fun1.functionName=='用户管理'}">
+                    <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" class="dropdown-toggle">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                        <span class="menu-text">{{fun1.functionName}}</span>
                     </a>
 
                     <b class="arrow"></b>
-                </li>
-                <!-- 用户管理-->
-                <li class="active open">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-file-o"></i>
-                        <span class="menu-text">
-								用户管理
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="active">
-                            <a href="queryuser.html">
+                    <ul v-if="level_2[index].length > 0" class="submenu">
+                        <li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='queryuser.html'}">
+                            <a :href="fun2.address">
                                 <i class="menu-icon fa fa-caret-right"></i>
-                                查看用户
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li>
-                            <a href="addmanageuser.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                添加管理员
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="changepermission.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                修改权限
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 房源管理-->
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-file-o"></i>
-                        <span class="menu-text">
-								房源管理
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a href="housing_review.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                房源审核
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="housing_check.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                查询房源
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="housing_off.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                帮扶活动
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 评论管理    -->
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-file-o"></i>
-                        <span class="menu-text">
-								评论管理
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a href="comment_check.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                查询评论
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="comment_ban.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                封禁用户评论
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 订单管理 -->
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-file-o"></i>
-                        <span class="menu-text">
-								订单管理
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a href="orderW01a.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                查询订单
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="orderW04a.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                退款
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 图表管理模块 -->
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-bar-chart-o"></i>
-                        <span class="menu-text">
-								图表管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a href="echartsW02.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                利润流水图表
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
-                <!-- 优惠模块 -->
-                <li class="">
-                    <a href="#" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-bar-chart-o"></i>
-                        <span class="menu-text">
-								优惠管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-                        <b class="arrow fa fa-angle-down"></b>
-                    </a>
-
-                    <b class="arrow"></b>
-
-                    <ul class="submenu">
-                        <li class="">
-                            <a href="admaddcoupon.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                发布优惠券
-                            </a>
-
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="admupdatecoupon.html">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                修改优惠券
+                                {{fun2.functionName}}
                             </a>
 
                             <b class="arrow"></b>
@@ -356,8 +165,7 @@
                     </ul>
                 </li>
             </ul>
-
-
+            <!--功能列表-->
             <!-- /.nav-list -->
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -491,8 +299,8 @@
 
                                 <!-- div.dataTables_borderWrap -->
                                 <!--表格内容主体-->
-                                <div>
-                                    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                                <div v-show="selectFlag">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
                                             <th class="center">
@@ -566,6 +374,33 @@
                                             </ul>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div v-show="!selectFlag">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="center">
+                                                <!-- <label class="pos-rel">
+                                                     <input type="checkbox" class="ace" @click="allCheck()"/>
+                                                     <span class="lbl"></span>
+                                                 </label>-->
+                                                序号
+                                            </th>
+                                            <th>用户名</th>
+                                            <th>用户账号</th>
+                                            <th class="hidden-480">联系方式</th>
+                                            <!--<th class="hidden-480">身份证号</th>-->
+                                            <th>用户角色</th>
+                                            <th>用户状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr align="center"><td colspan="8"><h1>该选项下暂无内容</h1></td></tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <!-- PAGE CONTENT ENDS 自己写的内容 -->

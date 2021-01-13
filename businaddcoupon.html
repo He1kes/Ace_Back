@@ -143,166 +143,19 @@
             </div>
         </div><!-- /.sidebar-shortcuts -->
 
-        <ul class="nav nav-list">
-            <li class="">
-                <a href="businesses.html">
-                    <i class="menu-icon fa fa-tachometer"></i>
-                    <span class="menu-text">仪表盘</span>
+        <ul id="theFunction" class="nav nav-list">
+            <li v-for="(fun1, index) in level_1" class="">
+                <a :href="fun1.address == null ? '#' : fun1.address" class="dropdown-toggle">
+                    <i class="glyphicon glyphicon-th-list"></i>
+                    <span class="menu-text">{{fun1.functionName}}</span>
                 </a>
 
                 <b class="arrow"></b>
-            </li>
-            <!-- 房源管理-->
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-file-o"></i>
-                    <span class="menu-text">
-								房源管理
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="housing_add.html">
+                <ul v-if="level_2[index].length > 0" class="submenu">
+                    <li v-for="(fun2, ind) in level_2[index]" class="">
+                        <a :href="fun2.address">
                             <i class="menu-icon fa fa-caret-right"></i>
-                            新增房源
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="">
-                        <a href="housing_info.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            我的房源
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-            <!-- 订单管理模块 -->
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-file-o"></i>
-                    <span class="menu-text">
-								订单管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="orderW01b.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            查看订单
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="">
-                        <a href="orderW05.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            审核
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="">
-                        <a href="orderW06.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            入住
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-            <!-- 收入图表管理模块 -->
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-bar-chart-o"></i>
-                    <span class="menu-text">
-								图表管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="echartsW01.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            租金收入报表
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-            <!-- 消息模块 -->
-            <li class="">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa  fa-comments-o"></i>
-                    <span class="menu-text">
-								消息管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="">
-                        <a href="chatW01.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            我的消息
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- 优惠模块 -->
-            <li class="active open">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-file-o"></i>
-                    <span class="menu-text">
-								优惠模块
-								<span class="badge badge-primary"></span>
-							</span>
-
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="active">
-                        <a href="businaddcoupon.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            发布优惠券
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="">
-                        <a href="businupdatecoupon.html">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            修改优惠券
+                            {{fun2.functionName}}
                         </a>
 
                         <b class="arrow"></b>
@@ -310,7 +163,6 @@
                 </ul>
             </li>
         </ul>
-
 
         <!-- /.nav-list -->
 

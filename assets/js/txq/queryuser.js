@@ -2,7 +2,7 @@ const userTable = new Vue({
     el: '#userTable',
     data: {
         //查询是否有数据标记
-        selectFlag: false,
+        selectFlag: true,
         page: {
                 //当前页
                 pageNum: 1,
@@ -73,9 +73,12 @@ const userTable = new Vue({
                 .then(function (result) {
                     that.page = result.data.data;
                     if (result.data.data.list != null && result.data.data.list.length > 0) {
+                        that.selectFlag = true;
                         for (let i = 0; i < result.data.data.list.length; i++) {
                             that.check[i] = false;
                         }
+                    } else {
+                        that.selectFlag = false;
                     }
                 });
         },

@@ -143,150 +143,28 @@
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
-				<ul class="nav nav-list">
-
-					<li class="">
-						<a href="ordinary.html">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text">仪表盘</span>
+				<!--功能列表-->
+				<ul id="theFunction" class="nav nav-list">
+					<li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='订单管理', open: fun1.functionName=='订单管理'}">
+						<a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" class="dropdown-toggle">
+							<i class="glyphicon glyphicon-th-list"></i>
+							<span class="menu-text">{{fun1.functionName}}</span>
 						</a>
 
 						<b class="arrow"></b>
-					</li>
-					<!-- 个人管理-->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								个人管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-
-							<li class="">
-								<a href="manageself.html">
+						<ul v-if="level_2[index].length > 0" class="submenu">
+							<li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='orderW03.html'}">
+								<a :href="fun2.address">
 									<i class="menu-icon fa fa-caret-right"></i>
-									修改信息
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="managepassword.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									修改密码
+									{{fun2.functionName}}
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 						</ul>
 					</li>
-					<!-- 订单管理模块 -->
-					<li class="active open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								订单管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-
-							<li class="">
-								<a href="orderW01.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									我的订单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="orderW02.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									待支付
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="active">
-								<a href="orderW03.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									待使用
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="orderW04.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									退款
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-
-					<!-- 我的心愿单 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								我的心愿单
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="collection.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查看心愿单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 评论 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								我的评论
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="my_comment.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查看评论
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-
 				</ul>
-
+				<!--功能列表-->
 
 				<!-- /.nav-list -->
 

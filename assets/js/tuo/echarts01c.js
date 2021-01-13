@@ -83,7 +83,7 @@ $("#selectYearMonth").click(function () {
     dataYear1 = year;
     dataMonth1 = month;
     getDays(year,month);
-    getChartOneData(dataYear1,dataMonth1,dataday1);
+    getChartOneData(dataYear1,dataMonth1,dataday1,userId);
 })
 
 //设置x轴月份数组(月入收益图表）

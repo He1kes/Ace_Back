@@ -144,7 +144,7 @@
             </div><!-- /.sidebar-shortcuts -->
 
             <ul id="theFunction" class="nav nav-list">
-                <li v-for="(fun1, index) in level_1" class="">
+                <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='仪表盘'}">
                     <a :href="fun1.address == null ? '#' : fun1.address" class="dropdown-toggle">
                         <i class="glyphicon glyphicon-th-list"></i>
                         <span class="menu-text">{{fun1.functionName}}</span>

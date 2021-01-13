@@ -32,8 +32,12 @@ const loginDiv = new Vue({
                 }
             })
                 .then(function (result) {
-                    that.imgSrc = result.data.data.userImage;
-                    that.userName = result.data.data.userName;
+                    if (result.data != null && result.data.data != null) {
+                        that.imgSrc = result.data.data.userImage;
+                        that.userName = result.data.data.userName;
+                    } else {
+                        window.location.href = 'mylogin.html';
+                    }
                 });
         }
     },
@@ -61,8 +65,10 @@ const functions = new Vue({
                 }
             })
                 .then(function (result) {
-                    that.level_1 = result.data.data[0];
-                    that.level_2 = result.data.data[1];
+                    if (result.data != null && result.data.data != null) {
+                        that.level_1 = result.data.data[0];
+                        that.level_2 = result.data.data[1];
+                    }
                 });
         }
     },

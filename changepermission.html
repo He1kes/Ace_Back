@@ -147,7 +147,7 @@
             <!--功能列表-->
             <ul id="theFunction" class="nav nav-list">
                 <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='用户管理', open: fun1.functionName=='用户管理'}">
-                    <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" class="dropdown-toggle">
+                    <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" :class="{'dropdown-toggle': fun1.functionName!='仪表盘'}">
                         <i class="glyphicon glyphicon-th-list"></i>
                         <span class="menu-text">{{fun1.functionName}}</span>
                     </a>
@@ -260,12 +260,12 @@
                         </div><!-- /.ace-settings-box -->
                     </div><!-- /.ace-settings-container -->
 
-                    <div class="row">
+                    <div class="row" id="changepermission">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS 自己写的内容-->
 
                             <!-- 表格 -->
-                            <div class="col-xs-12" id="orderTable01">
+                            <div class="col-xs-12">
                                 <h4 class="header smaller lighter blue">管理员列表</h4>
                                 <!--四个小图标-->
                                 <div class="clearfix">
@@ -273,7 +273,7 @@
                                 </div>
 
                                 <!-- 搜索框 -->
-                                <div class="col-sm-2"></div>
+                               <!-- <div class="col-sm-2"></div>
                                 <div class="col-xs-6">
                                     <form class="form-inline">
 
@@ -288,7 +288,7 @@
                                         &nbsp;&nbsp;
                                         <button type="button" class="btn btn-purple btn-sm">查询</button>
                                     </form>
-                                </div>
+                                </div>-->
 
                                 <!-- 控制排版 -->
                                 <div class="col-xs-12"><br></div>
@@ -302,166 +302,47 @@
                                         <thead>
                                             <tr>
                                                 <th style="font-weight: bold; font-size: 1.4em; color: black">序号</th>
-                                                <th style="font-weight: bold; font-size: 1.4em; color: black">账号</th>
-                                                <th style="font-weight: bold; font-size: 1.4em; color: black">正常状态</th>
                                                 <th style="font-weight: bold; font-size: 1.4em; color: black">角色</th>
                                                 <th style="font-weight: bold; font-size: 1.4em; color: black">操作</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>正常</td>
-                                                <td>普通管理员</td>
+                                            <tr v-for="(item, index) in page.list">
+                                                <td v-text="(page.pageNum -1) * page.pageSize + index + 1">1</td>
+                                                <td v-text="item.roleName">普通管理员</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-success" href="changepermission2.html">修改权限</a>
-                                                    <button class="btn btn-sm btn-danger">禁&emsp;用</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>正常</td>
-                                                <td>普通管理员</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-success" href="changepermission2.html">修改权限</a>
-                                                    <button class="btn btn-sm btn-danger">禁&emsp;用</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>正常</td>
-                                                <td>普通管理员</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-success" href="changepermission2.html">修改权限</a>
-                                                    <button class="btn btn-sm btn-danger">禁&emsp;用</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>正常</td>
-                                                <td>普通管理员</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-success" href="changepermission2.html">修改权限</a>
-                                                    <button class="btn btn-sm btn-danger">禁&emsp;用</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>张三</td>
-                                                <td>正常</td>
-                                                <td>普通管理员</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-success" href="changepermission2.html">修改权限</a>
-                                                    <button class="btn btn-sm btn-danger">禁&emsp;用</button>
+                                                    <a class="btn btn-sm btn-danger" :href="'changepermission2.html?roleId=' + item.id">修改权限</a>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <!-- 分页 -->
                                     <div class="col-sm-12">
-                                        <p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+                                        <p style="font-size: 15px;float: right">共{{page.total}}条记录，当前是{{page.pageNum}}/{{page.pages}}页</p>
                                     </div>
                                     <div class="col-xs-12" align="center">
                                         <div>
                                             <ul class="pagination">
-                                                <li class="disabled">
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <li :class="{disabled:(page.pageNum == 1)}">
+                                                    <a @click="prevPage()" href="javascript:void(0);" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
                                                         <i class="ace-icon fa fa-angle-double-left"></i>
                                                     </a>
                                                 </li>
 
-                                                <li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+                                                <li v-for="item in page.navigatepageNums" :class="{active:(item==page.pageNum)}">
+                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getRoleByPage(item)">{{item}}</a>
                                                 </li>
 
-                                                <li>
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <li :class="{disabled:(page.pageNum == page.pages)}">
+                                                    <a @click="nextPage()" href="javascript:void(0);" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
                                                         <i class="ace-icon fa fa-angle-double-right"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <!-- 详情页 -->
-                                    <div class="col-sm-12" v-show="false">
-                                        <div class="table-detail">
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-2">
-                                                    <div class="text-center">
-                                                        <!-- 内容居中 -->
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-xs-12 col-sm-8">
-                                                    <div class="space visible-xs"></div>
-
-                                                    <div class="profile-user-info profile-user-info-striped">
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Username </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>alexdoe</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Location </div>
-
-                                                            <div class="profile-info-value">
-                                                                <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                                <span>Netherlands, Amsterdam</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Age </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>38</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Joined </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>2010/06/20</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Last Online </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>3 hours ago</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> About Me </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>Bio</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-2">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- PAGE CONTENT ENDS 自己写的内容 -->
@@ -530,12 +411,12 @@
 
 <!-- vue -->
 <script src="assets/js/tuo/vue.js"></script>
-<script src="assets/js/tuo/orderWcommon.js"></script>
-
 
 <!--txq-->
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/txq/commons.js"></script>
+
+<script src="assets/js/txq/changepermission.js"></script>
 
 </body>
 </html>

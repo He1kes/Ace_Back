@@ -146,7 +146,7 @@
         <!--功能列表-->
         <ul id="theFunction" class="nav nav-list">
             <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='优惠管理', open: fun1.functionName=='优惠管理'}">
-                <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" class="dropdown-toggle">
+                <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" :class="{'dropdown-toggle': fun1.functionName!='仪表盘'}">
                     <i class="glyphicon glyphicon-th-list"></i>
                     <span class="menu-text">{{fun1.functionName}}</span>
                 </a>

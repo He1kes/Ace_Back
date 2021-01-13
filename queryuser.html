@@ -44,7 +44,7 @@
 </head>
 
 <body class="no-skin">
-<div id="app">
+<div>
     <div id="navbar" class="navbar navbar-default          ace-save-state">
         <div class="navbar-container ace-save-state" id="navbar-container">
             <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -58,7 +58,7 @@
             </button>
 
             <div class="navbar-header pull-left">
-                <a href="index.html" class="navbar-brand">
+                <a href="admin.html" class="navbar-brand">
                     <small>
                         <i class="fa fa-leaf"></i>
                         Ace Admin
@@ -66,295 +66,35 @@
                 </a>
             </div>
 
-            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            <div id="loginDiv" class="navbar-buttons navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
-                    <li class="grey dropdown-modal">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-tasks"></i>
-                            <span class="badge badge-grey">4</span>
-                        </a>
-
-                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="ace-icon fa fa-check"></i>
-                                4 Tasks to complete
-                            </li>
-
-                            <li class="dropdown-content">
-                                <ul class="dropdown-menu dropdown-navbar">
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-                                                <span class="pull-left">Software Update</span>
-                                                <span class="pull-right">65%</span>
-                                            </div>
-
-                                            <div class="progress progress-mini">
-                                                <div style="width:65%" class="progress-bar"></div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-                                                <span class="pull-left">Hardware Upgrade</span>
-                                                <span class="pull-right">35%</span>
-                                            </div>
-
-                                            <div class="progress progress-mini">
-                                                <div style="width:35%" class="progress-bar progress-bar-danger"></div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-                                                <span class="pull-left">Unit Testing</span>
-                                                <span class="pull-right">15%</span>
-                                            </div>
-
-                                            <div class="progress progress-mini">
-                                                <div style="width:15%" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-                                                <span class="pull-left">Bug Fixes</span>
-                                                <span class="pull-right">90%</span>
-                                            </div>
-
-                                            <div class="progress progress-mini progress-striped active">
-                                                <div style="width:90%" class="progress-bar progress-bar-success"></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-footer">
-                                <a href="#">
-                                    See tasks with details
-                                    <i class="ace-icon fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="purple dropdown-modal">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-bell icon-animated-bell"></i>
-                            <span class="badge badge-important">8</span>
-                        </a>
-
-                        <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="ace-icon fa fa-exclamation-triangle"></i>
-                                8 Notifications
-                            </li>
-
-                            <li class="dropdown-content">
-                                <ul class="dropdown-menu dropdown-navbar navbar-pink">
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-													<span class="pull-left">
-														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
-														New Comments
-													</span>
-                                                <span class="pull-right badge badge-info">+12</span>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <i class="btn btn-xs btn-primary fa fa-user"></i>
-                                            Bob just signed up as an editor ...
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-													<span class="pull-left">
-														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
-														New Orders
-													</span>
-                                                <span class="pull-right badge badge-success">+8</span>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">
-                                            <div class="clearfix">
-													<span class="pull-left">
-														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
-														Followers
-													</span>
-                                                <span class="pull-right badge badge-info">+11</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-footer">
-                                <a href="#">
-                                    See all notifications
-                                    <i class="ace-icon fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="green dropdown-modal">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-                            <span class="badge badge-success">5</span>
-                        </a>
-
-                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="ace-icon fa fa-envelope-o"></i>
-                                5 Messages
-                            </li>
-
-                            <li class="dropdown-content">
-                                <ul class="dropdown-menu dropdown-navbar">
-                                    <li>
-                                        <a href="#" class="clearfix">
-                                            <img src="assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                                            <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Alex:</span>
-														Ciao sociis natoque penatibus et auctor ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>a moment ago</span>
-													</span>
-												</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="clearfix">
-                                            <img src="assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-                                            <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Susan:</span>
-														Vestibulum id ligula porta felis euismod ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>20 minutes ago</span>
-													</span>
-												</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="clearfix">
-                                            <img src="assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-                                            <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Bob:</span>
-														Nullam quis risus eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>3:15 pm</span>
-													</span>
-												</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="clearfix">
-                                            <img src="assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
-                                            <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Kate:</span>
-														Ciao sociis natoque eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>1:33 pm</span>
-													</span>
-												</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="clearfix">
-                                            <img src="assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
-                                            <span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Fred:</span>
-														Vestibulum id penatibus et auctor  ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>10:09 am</span>
-													</span>
-												</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-footer">
-                                <a href="inbox.html">
-                                    See all messages
-                                    <i class="ace-icon fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <li class="light-blue dropdown-modal">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                            <img class="nav-user-photo" :src="imgSrc" alt="加载失败" />
                             <span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small v-text="userName"></small>
+									欢迎您！
 								</span>
 
                             <i class="ace-icon fa fa-caret-down"></i>
                         </a>
 
                         <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-cog"></i>
-                                    Settings
-                                </a>
-                            </li>
 
                             <li>
-                                <a href="profile.html">
+                                <a href="myselfCenter.html">
                                     <i class="ace-icon fa fa-user"></i>
-                                    Profile
+                                    个人中心
                                 </a>
                             </li>
 
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
+                                <a href="javascript:void(0);" @click="loginOut()">
                                     <i class="ace-icon fa fa-power-off"></i>
-                                    Logout
+                                    注销
                                 </a>
                             </li>
                         </ul>
@@ -711,7 +451,7 @@
                         </div><!-- /.ace-settings-box -->
                     </div><!-- /.ace-settings-container -->
 
-                    <div class="row">
+                    <div id="userTable" class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS 自己写的内容-->
 
@@ -728,22 +468,20 @@
                                     <form class="form-inline">
 
                                         <div class="form-group">
-                                            <label for="exampleInputName2">用户名</label>
-                                            <input type="text" class="form-control" id="exampleInputName2" placeholder="按用户名查找">
+                                            <label for="userName">用户名</label>
+                                            <input v-model="form.userName" type="text" class="form-control" id="userName" placeholder="按用户名查找">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail2">账号</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="按账号查找">
+                                            <label for="userAccount">账号</label>
+                                            <input v-model="form.userAccount" type="text" class="form-control" id="userAccount" placeholder="按账号查找">
                                         </div>
 
-                                        <select class="form-control">
-                                            <option>全部角色</option>
-                                            <option>普通用户</option>
-                                            <option>房东</option>
-                                            <option>管理员</option>
+                                        <select v-model="form.roleId" @change="changeRoleId($event)" class="form-control">
+                                            <option value="0">全部角色</option>
+                                            <option v-for="(item, index) in form.roles" :value="item.id">{{item.roleName}}</option>
                                         </select>
 
-                                        <button type="button" class="btn btn-purple btn-sm">查询</button>
+                                        <button @click="getUserList(1)" type="button" class="btn btn-purple btn-sm">查询</button>
                                     </form>
                                 </div>
 
@@ -758,15 +496,16 @@
                                         <thead>
                                         <tr>
                                             <th class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace" @click="allCheckBox()"/>
+                                               <!-- <label class="pos-rel">
+                                                    <input type="checkbox" class="ace" @click="allCheck()"/>
                                                     <span class="lbl"></span>
-                                                </label>
+                                                </label>-->
+                                                序号
                                             </th>
                                             <th>用户名</th>
                                             <th>用户账号</th>
                                             <th class="hidden-480">联系方式</th>
-                                            <th class="hidden-480">身份证号</th>
+                                            <!--<th class="hidden-480">身份证号</th>-->
                                             <th>用户角色</th>
                                             <th>用户状态</th>
                                             <th>操作</th>
@@ -774,27 +513,29 @@
                                         </thead>
 
                                         <tbody>
-                                        <tr>
-                                            <td class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace" :checked="allCheck"/>
+                                        <tr v-for="(item, index) in page.list">
+                                            <td class="center" v-text="(page.pageNum - 1) * page.pageSize + index + 1">
+                                               <!-- <label class="pos-rel">
+                                                    <input type="checkbox" :checked="checkAll" class="ace" @click="checkBox(index)"/>
                                                     <span class="lbl"></span>
-                                                </label>
+                                                </label>-->
                                             </td>
 
-                                            <td>
+                                            <td v-text="item.userName">
                                                 张三
                                             </td>
-                                            <td>txq123456789</td>
-                                            <td class="hidden-480">17758942846</td>
-                                            <td class="hidden-480">430523115894289199</td>
-                                            <td>普通用户</td>
-                                            <td>
+                                            <td v-text="item.userAccount">txq123456789</td>
+                                            <td v-text="item.phone" class="hidden-480">17758942846</td>
+                                            <!--<td v-text="item." class="hidden-480">430523115894289199</td>-->
+                                            <td v-text="item.role.roleName">普通用户</td>
+                                            <td v-text="item.userStatus == 0 ? '正常' : '已封禁'">
                                                 <span>正常</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-success">封禁/解禁用户</button>&nbsp;&nbsp;
-                                                <button class="btn btn-sm btn-danger">密码重置</button>
+                                                <span v-if="item.role.id > myRoleId">
+                                                    <button @click="bannedUser(item.id, item.userStatus)" class="btn btn-sm" :class="{'btn-success': item.userStatus == 1, 'btn-warning':  item.userStatus == 0}" v-text="item.userStatus == 0 ? '封禁用户' : '解禁用户'">封禁/解禁用户</button>&nbsp;&nbsp;
+                                                    <button @click="resetPassword(item.id)" class="btn btn-sm btn-danger">密码重置</button>
+                                                </span>
                                             </td>
 
                                         </tr>
@@ -802,98 +543,27 @@
                                     </table>
                                     <!-- 分页 -->
                                     <div class="col-sm-12">
-                                        <p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+                                        <p style="font-size: 15px;float: right">共{{page.total}}条记录，当前是{{page.pageNum}}/{{page.pages}}页</p>
                                     </div>
                                     <div class="col-xs-12" align="center">
                                         <div>
                                             <ul class="pagination">
-                                                <li class="disabled">
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <li :class="{disabled:(page.pageNum == 1)}">
+                                                    <a href="javascript:void(0);" @click="prevPage()" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
                                                         <i class="ace-icon fa fa-angle-double-left"></i>
                                                     </a>
                                                 </li>
 
-                                                <li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+                                                <li v-for="item in page.navigatepageNums" :class="{active:(item==page.pageNum)}">
+                                                    <a href="javascript:void(0);" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getUserList(item)">{{item}}</a>
                                                 </li>
 
-                                                <li>
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <li :class="{disabled:(page.pageNum == page.pages)}">
+                                                    <a href="javascript:void(0);" @click="nextPage()" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
                                                         <i class="ace-icon fa fa-angle-double-right"></i>
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>
-                                    </div>
-                                    <!-- 详情页 -->
-                                    <div class="col-sm-12" v-show="false">
-                                        <div class="table-detail">
-                                            <div class="row">
-                                                <div class="col-xs-12 col-sm-2">
-                                                    <div class="text-center">
-                                                        <!-- 内容居中 -->
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-8">
-                                                    <div class="space visible-xs"></div>
-
-                                                    <div class="profile-user-info profile-user-info-striped">
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Username </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>alexdoe</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Location </div>
-
-                                                            <div class="profile-info-value">
-                                                                <i class="fa fa-map-marker light-orange bigger-110"></i>
-                                                                <span>Netherlands, Amsterdam</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Age </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>38</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Joined </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>2010/06/20</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> Last Online </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>3 hours ago</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="profile-info-row">
-                                                            <div class="profile-info-name"> About Me </div>
-
-                                                            <div class="profile-info-value">
-                                                                <span>Bio</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-12 col-sm-2">
-
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -964,6 +634,8 @@
 
 <!-- vue -->
 <script src="assets/js/tuo/vue.js"></script>
-<script src="assets/js/tuo/orderWcommon.js"></script>
+<script src="assets/js/axios.min.js"></script>
+<script src="assets/js/txq/commons.js"></script>
+<script src="assets/js/txq/queryuser.js"></script>
 </body>
 </html>

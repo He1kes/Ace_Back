@@ -36,7 +36,9 @@
 
     <script src="assets/js/axios.min.js"></script>
     <script src="assets/js/vue.js"></script>
-    <script src="assets/js/txq/commons.js"></script>
+    <script>
+        let txqIp = 'http://192.168.0.16:8888';
+    </script>
 </head>
 
 <body class="login-layout light-login">
@@ -153,7 +155,7 @@
                                 </div><!-- /.widget-main -->
 
                                 <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
+                                    <a id="backLogin" href="#" data-target="#login-box" class="back-to-login-link">
                                         返回登录
                                         <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>

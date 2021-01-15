@@ -13,13 +13,13 @@ var app = new Vue({
         //当前用户token
         nowToken:localStorage.getItem("token"),
         //当前用户id
-        userId:"1",
+        userId:"",
         nowUser:{},
         pickUserId:"",
         pickUser:{},
         //分页
         pageNo:1,
-        pageSize:2,
+        pageSize:5,
         pages:1,
         dateTotal:0,
         navigatePageNums:[],
@@ -29,14 +29,15 @@ var app = new Vue({
         houseIdList:[],
         houseInfoList:[],
         houseTypeList:[],
+        landList:[],
         //选中的订单index
         pickIndex:0,
         //查询条件
         queryTJ:""
     },
     mounted:function(){
-        this.getUidByToken();
         this.allHouseType();
+        this.getOrders(1);
     },
     methods:{
         //展示订单详情
@@ -48,38 +49,25 @@ var app = new Vue({
             this.detailFlag = false;
         },
         //--------------------------------------
-        //通过token拿userId
-        getUidByToken: function(){
-            var that = this;
-            console.log(that.nowToken);
-            axios.get(that.tIP+that.orderIP+"getUserIdByToken", {headers: {'token': that.nowToken}}).then(
-                function (value) {
-                    //console.log(value.data.flag);
-                    console.log("getUidByToken:"+value.data.data);
-                    if(value.data.flag == true){
-                        that.userId = value.data.data;
-                        that.getOrders(1);
-                    }else {
-                        console.log(value.data.message);
-                    }
-                    that.getUserData(that.userId);
-                }
-            )
-        },
-        //获取用户信息
+        //获取租客信息
         getUserData:function (userId) {
             var that = this;
             axios.get(that.tIP+"/user/front/private/getUserData?userId="+userId, {headers: {'token': that.nowToken}}).then(
                 function (value) {
                     //console.log("getUserData:");
                     //console.log(value.data.data[0]);
-                    if(userId != that.userId){
-                        that.pickUser = value.data.data[0];
-                        //that.pickUserId = value.data.data[1];
-                    }else {
-                        that.nowUser = value.data.data[0];
-                        //that.userId = value.data.data[1];
-                    }
+                    that.nowUser = value.data.data[0];
+                }
+            )
+        },
+        //获取房东信息
+        getUserDataLand:function (userId) {
+            var that = this;
+            axios.get(that.tIP+"/user/front/private/getUserData?userId="+userId, {headers: {'token': that.nowToken}}).then(
+                function (value) {
+                    //console.log("getUserData:");
+                    //console.log(value.data.data[0]);
+                    that.pickUser = value.data.data[0];
                 }
             )
         },
@@ -98,17 +86,18 @@ var app = new Vue({
                 pageNo = that.pages;
             }
             if(that.queryTJ.length <= 0){
-                axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize+"&landId="+that.userId, {headers: {'token': that.nowToken}}).then(
+                axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize, {headers: {'token': that.nowToken}}).then(
                     function (value) {
                         that.pageNo = pageNo;
                         that.navigatePageNums = value.data.orders.navigatepageNums;
                         that.pages = value.data.orders.pages;
                         that.dateTotal = value.data.orders.total;
                         //数据
-                        //console.log(value.data.houseIds);
+                        //console.log(value.data.landIds);
                         that.ordersList = value.data.orders.list;
                         that.userList = value.data.userIds;
                         that.houseIdList = value.data.houseIds;
+                        that.landList = value.data.landIds;
                         if (that.ordersList.length <= 0) {
                             that.tipFlag = true;
                         }else {
@@ -121,7 +110,7 @@ var app = new Vue({
                     }
                 )
             }else {
-                axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize+"&landId="+that.userId+"&orderStatus="+that.queryTJ, {headers: {'token': that.nowToken}}).then(
+                axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize+"&orderStatus="+that.queryTJ, {headers: {'token': that.nowToken}}).then(
                     function (value) {
                         that.pageNo = pageNo;
                         that.navigatePageNums = value.data.orders.navigatepageNums;
@@ -132,6 +121,7 @@ var app = new Vue({
                         that.ordersList = value.data.orders.list;
                         that.userList = value.data.userIds;
                         that.houseIdList = value.data.houseIds;
+                        that.landList = value.data.landIds;
                         if (that.ordersList.length <= 0) {
                             that.tipFlag = true;
                         }else {
@@ -150,9 +140,10 @@ var app = new Vue({
         pickOrder:function (index) {
             var that = this;
             that.pickIndex = index;
-            that.pickUserId = that.userList[index];
-            that.getUserData(that.pickUserId);
-            that.checkDate();
+            that.userId = that.userList[index];
+            that.getUserData(that.userId);
+            that.pickUser = that.landList[index];
+            that.getUserDataLand(that.pickUser);
         },
         //根据houseId获取房源信息
         getHouseInfo:function (houseId) {
@@ -181,9 +172,6 @@ var app = new Vue({
                     }
                 }
             )
-        },
-        queryOrders:function () {
-
         }
     }
 })

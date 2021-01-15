@@ -185,7 +185,7 @@
 							<li>
 								<a href="#">订单模块</a>
 							</li>
-							<li class="active">我的订单</li>
+							<li class="active">订单</li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 
@@ -271,17 +271,13 @@
 
 									<!-- 搜索框 -->
 									<div class="col-xs-6">
-										<form>
-											<div class="input-group">
-												<input type="text" class="form-control search-query" placeholder="订单号/房源简介" />
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-purple btn-sm" style="background-color: #2A91D8">
-													<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-													查询
-													</button>
-											</span>
-											</div>
-										</form>
+										<input type="text" class="form-control" placeholder="订单状态" v-model="queryTJ">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-purple btn-sm" style="background-color: #2A91D8" @click="getOrders(1)">
+											<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+											查询
+										</button>
 									</div>
 
 									<!-- 控制排版 -->
@@ -296,77 +292,64 @@
 											<tr>
 												<th>订单号</th>
 												<th>订单金额</th>
-												<th>房东</th>
-												<th>房源简介</th>
+												<th>下单时间</th>
+												<th>房源名</th>
 												<th>房型</th>
-												<th class="hidden-480">入住时间</th>
-												<th class="hidden-480">退房时间</th>
-												<th>状态</th>
+												<th>入住时间</th>
+												<th>退房时间</th>
+												<th>订单状态</th>
 												<th>操作</th>
 											</tr>
 											</thead>
 
 											<tbody>
-											<tr>
+											<tbody>
+											<tr v-for="(order,index) in ordersList">
+												<td>{{order.orderNumber}}</td>
+												<td>{{order.orderTotal}}</td>
+												<td>{{order.orderTime}}</td>
+												<td>{{houseInfoList[index].lot}}</td>
+												<td>{{houseTypeList[houseInfoList[index].houseType-1].houseTypeName}}</td>
+												<td>{{order.startDate}}</td>
+												<td>{{order.stopDate}}</td>
+												<td>{{order.orderStatus}}</td>
 												<td>
-													1837428349236
+													<button class="btn btn-sm btn-success" @click="detailShow();pickOrder(index)">详细信息</button>
 												</td>
-												<td>450</td>
-												<td>鹏海民宿</td>
-												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
-												<td>一居室</td>
-												<td class="hidden-480">2020-10-19</td>
-												<td class="hidden-480">2020-10-20</td>
-												<td>已退款</td>
-												<td>
-													<button class="btn btn-sm btn-success" @click="detailShow">详细信息</button>
-												</td>
-
-											</tr>
-											<tr>
-												<td>
-													1837428349236
-												</td>
-												<td>450</td>
-												<td>鹏海民宿</td>
-												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
-												<td>一居室</td>
-												<td class="hidden-480">2020-10-09</td>
-												<td class="hidden-480">2020-10-10</td>
-												<td>已完成</td>
-												<td>
-													<button class="btn btn-sm btn-success" @click="detailShow">详细信息</button>
-												</td>
-
 											</tr>
 											</tbody>
 										</table>
+										<!--提示框-->
+										<div class="col-sm-12">
+											<div align="center" style="margin: auto" v-show="tipFlag">
+												<p style="color: #adadad;font-size:20px;font-weight: bold">暂无订单信息！</p>
+											</div>
+										</div>
 										<!-- 分页 -->
 										<div class="col-sm-12">
-											<p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+											<p style="font-size: 15px;float: right">共{{dateTotal}}条记录，当前是{{pageNo}}/{{pages}}页</p>
 										</div>
 										<div class="col-xs-12" align="center">
 											<div>
 												<ul class="pagination">
-													<li class="disabled">
+													<li @click="getOrders(pageNo-1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
 															<i class="ace-icon fa fa-angle-double-left"></i>
 														</a>
 													</li>
 
-													<li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+													<li v-for="item in navigatePageNums" :class="{active:(item==pageNo)}">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getOrders(item)">{{item}}</a>
 													</li>
 
-													<li>
+													<li @click="getOrders(pageNo+1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
-															<i class="ace-icon fa fa-angle-double-right"></i>
+															<i class="ace-icon fa fa-angle-double-right" ></i>
 														</a>
 													</li>
 												</ul>
 											</div>
 										</div>
-
 										<!-- 详情页 -->
 										<div class="col-sm-12" v-show="detailFlag">
 											<div class="table-detail">
@@ -383,44 +366,30 @@
 														<div class="profile-user-info profile-user-info-striped">
 
 															<div class="profile-info-row">
-																<div class="profile-info-name text-center"> 订单号 </div>
-																<div class="profile-info-value text-center">
-																	<span>1837428349236</span>
-																</div>
-															</div>
-
-															<div class="profile-info-row">
 																<div class="profile-info-name text-center"> 入住人 </div>
 																<div class="profile-info-value text-center">
-																	<span>小白</span>
+																	<span>{{nowUser.userName}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> 联系方式 </div>
+																<div class="profile-info-name"> 联系电话 </div>
 																<div class="profile-info-value text-center">
-																	<span>18765478933</span>
+																	<span>{{nowUser.phone}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name text-center"> 下单时间 </div>
+																<div class="profile-info-name text-center"> 房东 </div>
 																<div class="profile-info-value text-center">
-																	<span>2020-10-07 18:34:53</span>
+																	<span>{{pickUser.userName}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name text-center"> 房源具体地址 </div>
+																<div class="profile-info-name"> 联系电话 </div>
 																<div class="profile-info-value text-center">
-																	<span>湖南省长沙市雨花区鹏海小区</span>
-																</div>
-															</div>
-
-															<div class="profile-info-row">
-																<div class="profile-info-name"> 房东联系方式 </div>
-																<div class="profile-info-value text-center">
-																	<span>18746793789</span>
+																	<span>{{pickUser.phone}}</span>
 																</div>
 															</div>
 
@@ -504,12 +473,13 @@
 		<!-- inline scripts related to this page -->
 
 
-		<!-- vue -->
-		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderW01.js"></script>
-
 		<!--txq-->
+		<script src="assets/js/tuo/vue.js"></script>
 		<script src="assets/js/axios.min.js"></script>
 		<script src="assets/js/txq/commons.js"></script>
+
+		<!-- vue -->
+		<script src="assets/js/tuo/orderW01a.js"></script>
+
 	</body>
 </html>

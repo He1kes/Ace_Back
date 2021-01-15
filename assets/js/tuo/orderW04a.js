@@ -1,5 +1,5 @@
 var app = new Vue({
-    el:"#orderTable05",
+    el:"#orderTable01",
     data:{
         option:"后缀",
         detailFlag:false,
@@ -14,7 +14,7 @@ var app = new Vue({
         //当前用户token
         nowToken:localStorage.getItem("token"),
         //当前用户id
-        userId:"1",
+        userId:"",
         nowUser:{},
         pickUserId:"",
         pickUser:{},
@@ -30,16 +30,15 @@ var app = new Vue({
         houseIdList:[],
         houseInfoList:[],
         houseTypeList:[],
+        landList:[],
         //选中的订单index
         pickIndex:0,
-        //这里做状态用
-        queryTJ:"待房东确认",
-        passStatus:"待入住",
-        rejectStatus:"已取消（房东拒绝）"
+        //查询条件
+        rejectStatus:"已取消（已退款）"
     },
     mounted:function(){
-        this.getUidByToken();
         this.allHouseType();
+        this.getOrders(1);
     },
     methods:{
         //复选框全选
@@ -48,47 +47,34 @@ var app = new Vue({
             //console.log(event.target.checked);
             this.allCheck = event.target.checked;
         },
-        //展示拒绝预订原因
+        //展示订单详情
         detailShow:function () {
             this.detailFlag = true;
         },
-        //关闭拒绝预订原因
+        //关闭订单详情
         detailClose:function () {
             this.detailFlag = false;
         },
         //--------------------------------------
-        //通过token拿userId
-        getUidByToken: function(){
-            var that = this;
-            console.log(that.nowToken);
-            axios.get(that.tIP+that.orderIP+"getUserIdByToken", {headers: {'token': that.nowToken}}).then(
-                function (value) {
-                    //console.log(value.data.flag);
-                    console.log("getUidByToken:"+value.data.data);
-                    if(value.data.flag == true){
-                        that.userId = value.data.data;
-                        that.getOrders(1);
-                    }else {
-                        console.log(value.data.message);
-                    }
-                    that.getUserData(that.userId);
-                }
-            )
-        },
-        //获取用户信息
+        //获取租客信息
         getUserData:function (userId) {
             var that = this;
             axios.get(that.tIP+"/user/front/private/getUserData?userId="+userId, {headers: {'token': that.nowToken}}).then(
                 function (value) {
                     //console.log("getUserData:");
                     //console.log(value.data.data[0]);
-                    if(userId != that.userId){
-                        that.pickUser = value.data.data[0];
-                        //that.pickUserId = value.data.data[1];
-                    }else {
-                        that.nowUser = value.data.data[0];
-                        //that.userId = value.data.data[1];
-                    }
+                    that.nowUser = value.data.data[0];
+                }
+            )
+        },
+        //获取房东信息
+        getUserDataLand:function (userId) {
+            var that = this;
+            axios.get(that.tIP+"/user/front/private/getUserData?userId="+userId, {headers: {'token': that.nowToken}}).then(
+                function (value) {
+                    //console.log("getUserData:");
+                    //console.log(value.data.data[0]);
+                    that.pickUser = value.data.data[0];
                 }
             )
         },
@@ -106,7 +92,7 @@ var app = new Vue({
             if(pageNo > that.pages){
                 pageNo = that.pages;
             }
-            axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize+"&landId="+that.userId+"&orderStatus="+that.queryTJ, {headers: {'token': that.nowToken}}).then(
+            axios.get(that.tIP+that.orderBack+"getOrdersBack?pageNo="+pageNo+"&pageSize="+that.pageSize+"&orderStatus=退款中", {headers: {'token': that.nowToken}}).then(
                 function (value) {
                     that.pageNo = pageNo;
                     that.navigatePageNums = value.data.orders.navigatepageNums;
@@ -117,6 +103,7 @@ var app = new Vue({
                     that.ordersList = value.data.orders.list;
                     that.userList = value.data.userIds;
                     that.houseIdList = value.data.houseIds;
+                    that.landList = value.data.landIds;
                     if (that.ordersList.length <= 0) {
                         that.tipFlag = true;
                     }else {
@@ -134,9 +121,10 @@ var app = new Vue({
         pickOrder:function (index) {
             var that = this;
             that.pickIndex = index;
-            that.pickUserId = that.userList[index];
-            that.getUserData(that.pickUserId);
-            that.checkDate();
+            that.userId = that.userList[index];
+            that.getUserData(that.userId);
+            that.pickUser = that.landList[index];
+            that.getUserDataLand(that.pickUser);
         },
         //根据houseId获取房源信息
         getHouseInfo:function (houseId) {
@@ -166,33 +154,9 @@ var app = new Vue({
                 }
             )
         },
-        //通过预订审核
-        passCheck:function (orderId) {
+        //确认退款----------
+        refund:function () {
             var that = this;
-            axios.get(that.tIP+that.orderIP+"updateOrderStatus?orderId="+orderId+"&orderStatus="+that.passStatus, {headers: {'token': that.nowToken}}).then(
-                function (value) {
-                    if(value.data.flag == true){
-                        console.log("通过预订！");
-                        that.getOrders(that.pageNo);
-                    }else {
-                        console.log(value.data.message);
-                    }
-                }
-            )
-        },
-        //拒绝预订审核
-        rejectCheck:function (orderId) {
-            var that = this;
-            axios.get(that.tIP+that.orderIP+"updateOrderStatus?orderId="+orderId+"&orderStatus="+that.rejectStatus, {headers: {'token': that.nowToken}}).then(
-                function (value) {
-                    if(value.data.flag == true){
-                        console.log("拒绝预订！");
-                        that.getOrders(that.pageNo);
-                    }else {
-                        console.log(value.data.message);
-                    }
-                }
-            )
         }
     }
 })

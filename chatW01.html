@@ -264,7 +264,7 @@
 								<div class="col-xs-12" id="chatW01">
 									<!-- 表格 -->
 									<div id="chatTable01" v-show="!detailFlag">
-										<h4 class="header smaller lighter blue">我的信息</h4>
+										<h4 class="header smaller lighter blue">我的消息</h4>
 
 										<!-- 控制排版 -->
 										<div class="col-xs-12"><br></div>
@@ -282,40 +282,44 @@
 											</thead>
 
 											<tbody>
-											<tr>
-												<td>小黑</td>
-												<td>2</td>
+											<tr v-for="(unp,index) in userNamePhoList">
+												<td>{{unp.uname}}</td>
+												<td>{{noViewCountList[index]}}</td>
 												<td>
-													<button class="btn btn-sm btn-success" @click="detailShow">查看</button>
+													<button class="btn btn-sm btn-success" @click="detailShow();getChatDetail(unp.uid,index)">查看</button>
 												</td>
 											</tr>
 											</tbody>
 										</table>
-										<!-- 分页 -->
-										<div>
-											<div class="col-sm-12">
-												<p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+										<!--提示框-->
+										<div class="col-sm-12">
+											<div align="center" style="margin: auto" v-show="tipFlag">
+												<p style="color: #adadad;font-size:20px;font-weight: bold">暂无消息列表！</p>
 											</div>
-											<div class="col-xs-12" align="center">
-												<div>
-													<ul class="pagination">
-														<li class="disabled">
-															<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
-																<i class="ace-icon fa fa-angle-double-left"></i>
-															</a>
-														</li>
+										</div>
+										<!-- 分页 -->
+										<div class="col-sm-12">
+											<p style="font-size: 15px;float: right">共{{dateTotal}}条记录，当前是{{pageNo}}/{{pages}}页</p>
+										</div>
+										<div class="col-xs-12" align="center">
+											<div>
+												<ul class="pagination">
+													<li @click="getOrders(pageNo-1)">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+															<i class="ace-icon fa fa-angle-double-left"></i>
+														</a>
+													</li>
 
-														<li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-															<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
-														</li>
+													<li v-for="item in navigatePageNums" :class="{active:(item==pageNo)}">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getOrders(item)">{{item}}</a>
+													</li>
 
-														<li>
-															<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
-																<i class="ace-icon fa fa-angle-double-right"></i>
-															</a>
-														</li>
-													</ul>
-												</div>
+													<li @click="getOrders(pageNo+1)">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+															<i class="ace-icon fa fa-angle-double-right" ></i>
+														</a>
+													</li>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -329,97 +333,46 @@
 													<div class="col-xs-12 col-sm-6">
 														<div class="profile-user-info profile-user-info-striped" style="border: lightskyblue 1px solid;">
 															<!-- 历史框 -->
-															<div style="width: 100%; height: 390px;overflow: auto;padding: 10px;">
-
-																<div>
-																	<div>
-																		<img src="assets/images/tuo/head01.jpg" style="width: 50px;height: 50px;border-radius: 25px">&nbsp;&nbsp;
-																		<span style="color: lightskyblue">小黑</span>&nbsp;&nbsp;
-																		<span style="color: lightskyblue">2020-10-08 13:10:43</span>
+															<div style="height: 390px;overflow: auto;padding: 10px;">
+																<div v-for="chat in chatDetailList">
+																	<!--对方-->
+																	<div style="margin-bottom: 15px" v-show="chat.senderId == pickId">
+																		<div>
+																			<img :src="pickUserImag" alt="图片" style="width: 50px;height: 50px;border-radius: 25px">&nbsp;&nbsp;
+																			<span style="color: lightskyblue">{{chat.sendName}}</span>&nbsp;&nbsp;
+																			<span style="color: lightskyblue">{{chat.sendDate}}</span>
+																		</div>
+																		<div>
+																			<p style="margin-top: 10px;background-color: lightskyblue;border-radius: 5px;width: 400px;">
+																				{{chat.content}}
+																			</p>
+																		</div>
 																	</div>
-																	<div style="margin-top: 10px">
-																		<p style="background-color: lightskyblue;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办,岳阳市官方新闻门户网站,以主流广电媒体的专业视角,提供丰富、权威、时效性的资讯,是岳阳市最具影响力的新闻门户网站。
-																		</p>
-																	</div>
-																</div>
-
-																<div style="overflow: hidden">
-																	<div style="float: right">
-																		<span style="color: burlywood">2020-10-08 15:19:03</span>&nbsp;&nbsp;
-																		<span style="color: burlywood">小白</span>&nbsp;&nbsp;
-																		<img src="assets/images/tuo/head02.jpg" style="width: 50px;height: 50px;border-radius: 25px">
-																	</div>
-																	<div style="float: right;margin-top: 10px">
-																		<p style="background-color: burlywood;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办。
-																		</p>
-																	</div>
-																</div>
-
-																<div>
-																	<div>
-																		<img src="assets/images/tuo/head01.jpg" style="width: 50px;height: 50px;border-radius: 25px">&nbsp;&nbsp;
-																		<span style="color: lightskyblue">小黑</span>&nbsp;&nbsp;
-																		<span style="color: lightskyblue">2020-10-08 13:10:43</span>
-																	</div>
-																	<div style="margin-top: 10px">
-																		<p style="background-color: lightskyblue;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办,岳阳市官方新闻门户网站,以主流广电媒体的专业视角,提供丰富、权威、时效性的资讯,是岳阳市最具影响力的新闻门户网站。
-																		</p>
+																	<!--自己-->
+																	<div style="overflow: hidden;margin-bottom: 15px" v-show="chat.senderId == userId">
+																		<div style="float: right">
+																			<span style="color: burlywood">{{chat.sendDate}}</span>&nbsp;&nbsp;
+																			<span style="color: burlywood">{{chat.sendName}}</span>&nbsp;&nbsp;
+																			<img :src="nowUserNP[0].uimage" alt="图片" style="width: 50px;height: 50px;border-radius: 25px">
+																		</div>
+																		<div style="float: right">
+																			<p style="margin-top: 10px;background-color: burlywood;border-radius: 5px;width: 400px;">
+																				{{chat.content}}
+																			</p>
+																		</div>
 																	</div>
 																</div>
-
-																<div style="overflow: hidden">
-																	<div style="float: right">
-																		<span style="color: burlywood">2020-10-08 15:19:03</span>&nbsp;&nbsp;
-																		<span style="color: burlywood">小白</span>&nbsp;&nbsp;
-																		<img src="assets/images/tuo/head02.jpg" style="width: 50px;height: 50px;border-radius: 25px">
-																	</div>
-																	<div style="float: right;margin-top: 10px">
-																		<p style="background-color: burlywood;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办。
-																		</p>
-																	</div>
-																</div>
-
-																<div>
-																	<div>
-																		<img src="assets/images/tuo/head01.jpg" style="width: 50px;height: 50px;border-radius: 25px">&nbsp;&nbsp;
-																		<span style="color: lightskyblue">小黑</span>&nbsp;&nbsp;
-																		<span style="color: lightskyblue">2020-10-08 13:10:43</span>
-																	</div>
-																	<div style="margin-top: 10px">
-																		<p style="background-color: lightskyblue;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办,岳阳市官方新闻门户网站,以主流广电媒体的专业视角,提供丰富、权威、时效性的资讯,是岳阳市最具影响力的新闻门户网站。
-																		</p>
-																	</div>
-																</div>
-
-																<div style="overflow: hidden">
-																	<div style="float: right">
-																		<span style="color: burlywood">2020-10-08 15:19:03</span>&nbsp;&nbsp;
-																		<span style="color: burlywood">小白</span>&nbsp;&nbsp;
-																		<img src="assets/images/tuo/head02.jpg" style="width: 50px;height: 50px;border-radius: 25px">
-																	</div>
-																	<div style="float: right;margin-top: 10px">
-																		<p style="background-color: burlywood;border-radius: 5px;width: 400px;">
-																			岳阳新闻网,由岳阳市广播电视台主办。
-																		</p>
-																	</div>
-																</div>
-
 															</div>
 															<!-- 分割线 -->
 															<hr style="height: 0.5px;background-color:lightskyblue">
 															<!-- 发送框 -->
 															<div style="padding: 10px">
 																<div>
-																	<textarea style="width: 549px; height: 120px;"></textarea>
+																	<textarea style="width: 549px; height: 120px;" v-model="chatContent"></textarea>
 																</div>
 																<div class="text-right">
-																	<button class="btn btn-primary btn-sm">发送</button>&nbsp;&nbsp;
-																	<button class="btn btn-danger btn-sm" @click="detailClose">关闭</button>
+																	<button class="btn btn-primary btn-sm" @click="storeChat()">发送</button>&nbsp;&nbsp;
+																	<button class="btn btn-danger btn-sm" @click="detailClose();setViewed(pickId)">关闭</button>
 																</div>
 															</div>
 														</div>
@@ -494,13 +447,12 @@
 		<!-- inline scripts related to this page -->
 
 
-		<!-- vue -->
-		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/chatW01.js"></script>
-
-
 		<!--txq-->
+		<script src="assets/js/tuo/vue.js"></script>
 		<script src="assets/js/axios.min.js"></script>
 		<script src="assets/js/txq/commons.js"></script>
+
+		<!-- vue -->
+		<script src="assets/js/tuo/chatW01.js"></script>
 	</body>
 </html>

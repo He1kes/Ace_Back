@@ -32,12 +32,47 @@ const loginDiv = new Vue({
                 }
             })
                 .then(function (result) {
-                    that.imgSrc = result.data.data.userImage;
-                    that.userName = result.data.data.userName;
+                    if (result.data != null && result.data.data != null) {
+                        that.imgSrc = result.data.data.userImage;
+                        that.userName = result.data.data.userName;
+                    } else {
+                        window.location.href = 'mylogin.html';
+                    }
                 });
         }
     },
     created: function () {
         this.getUserMessage();
+    }
+});
+
+const functions = new Vue({
+    el: '#theFunction',
+    data: {
+        //一级列表
+        level_1: null,
+        //存储二级列表的集合
+        level_2: null
+    },
+    methods: {
+        getFunction() {
+            let that = this;
+            axios({
+                method: 'get',
+                url: txqIp + '/user/function/back/getFunction',
+                headers: {
+                    'token': localStorage.getItem('token')
+                }
+            })
+                .then(function (result) {
+                    if (result.data != null && result.data.data != null) {
+                        that.level_1 = result.data.data[0];
+                        that.level_2 = result.data.data[1];
+                    }
+                });
+        }
+    },
+    mounted: function () {
+        this.getFunction();
     }
 });

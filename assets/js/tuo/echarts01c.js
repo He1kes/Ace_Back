@@ -1,20 +1,33 @@
 //初始时间
 var initialDate = new Date();
+//地址
+var txq = txqIp;
+var orderPath = "/order/back";
+var orderIP="/order/front/private/";
+//token
+var token = localStorage.getItem("token");
+//用户id
+var userId;
+//图表1参数
+var dataYear1 = null;
+var dataMonth1 = null;
+var dataday1 = null;
+
+//图表y轴数据
+var chartOneDataY;
+var chartTwoDataY;
+
 
 //设置下拉框的年份（最近三年）
-var years = new Array();
 function getRecentYear(year) {
     for(var i=year;i>=year-2;i--){
         var $opt = $('<option value="'+i+'">'+i+'</option>');
         $(".year").append($opt);
-        years[i-1] = i;
     }
-    console.log(years);
 }
 getRecentYear(initialDate.getFullYear());
 
-//设置下拉框的月份、x轴月份数组（本年显示已过月份，往年显示所有月份）
-var months = new Array();
+//设置下拉框的月份（本年显示已过月份，往年显示所有月份）
 function getNowMonth(year) {
     $("#businessesEchartsDiv01 .month").empty();
     var nowDate = new Date();
@@ -24,16 +37,13 @@ function getNowMonth(year) {
         for(var i=1;i<=nowMonth;i++){
             var $opt = $('<option value="'+i+'">'+i+'</option>');
             $("#businessesEchartsDiv01 .month").append($opt);
-            months[i-1] = i;
         }
     }else {
         for(var i=1;i<=12;i++){
             var $opt = $('<option value="'+i+'">'+i+'</option>');
             $("#businessesEchartsDiv01 .month").append($opt);
-            months[i-1] = i;
         }
     }
-    console.log(months+" "+year);
 }
 getNowMonth(initialDate.getFullYear());
 
@@ -46,19 +56,19 @@ function getDays(year,month) {
     var nowMonth = nowDate.getMonth()+1;
     if(nowYear == year && nowMonth == month){
         var nowDay = nowDate.getDate();
+        dataday1 = nowDay;
         for(var i=1;i<nowDay;i++){
             days[i-1] = i;
         }
     }else {
         var nowDay = new Date(year,month,0).getDate();
+        dataday1 = nowDay;
         for(var i=1;i<=nowDay;i++){
             days[i-1] = i;
         }
     }
-    console.log(days+" "+year+"-"+month);
 }
 getDays(initialDate.getFullYear(),initialDate.getMonth()+1);
-
 
 //年、月下拉框联动(年确定月）
 $("#businessesEchartsDiv01 .year").blur(function () {
@@ -70,31 +80,88 @@ $("#businessesEchartsDiv01 .year").blur(function () {
 $("#selectYearMonth").click(function () {
     var year = $("#businessesEchartsDiv01").find(".year option:selected").val();
     var month = $("#businessesEchartsDiv01").find(".month option:selected").val();
+    dataYear1 = year;
+    dataMonth1 = month;
     getDays(year,month);
-    drawEcharts();
+    getChartOneData(dataYear1,dataMonth1,dataday1,userId);
 })
 
-//获取年下拉框选定的值
-$("#selectYear").click(function () {
-    var year = $("#businessesEchartsDiv02").find(".year option:selected").val();
-    console.log("chart2:"+year);
-})
+//设置x轴月份数组(月入收益图表）
+var months = new Array();
+months = [1,2,3,4,5,6,7,8,9,10,11,12];
+
+//设置饼状图的数据
+var yuesdate = new Array();
+function setData() {
+    for(var i=1;i<=12;i++){
+        var datay = {};
+        datay.name = months[i-1]+"月";
+        datay.value = chartTwoDataY[i-1];
+        yuesdate.push(datay);
+    }
+    console.log(yuesdate);
+}
 
 
+//通过token拿userId
+function getUidByToken() {
+    $.ajax({
+        url:txq+orderIP+"/getUserIdByToken",
+        headers:{"token":localStorage.getItem("token")},
+        async:false,
+        success:function (data) {
+            userId = data.data;
+            console.log("getUserIdByToken:");
+            console.log(userId);
+        }
+    })
+}
+getUidByToken();
 
-function drawEcharts() {
+//获取第一个图表的数据
+function getChartOneData(year,month,day,lid) {
+    $.ajax({
+        url:txq+orderPath+"/getOrderMoneyDay",
+        data:{year:year,month:month,day:day,landId:lid},
+        headers:{"token":localStorage.getItem("token")},
+        async:false,
+        success:function (data) {
+            chartOneDataY = data;
+            console.log("getChartOneData:");
+            console.log(data);
+            drawEchartOne();
+        }
+    })
+}
+
+//获取第二个图表的数据
+function getChartTwoData(year,month,lid) {
+    $.ajax({
+        url:txq+orderPath+"/getOrderMoneyMonth",
+        data:{year:year,month:month,landId:lid},
+        headers:{"token":localStorage.getItem("token")},
+        async:false,
+        success:function (data) {
+            chartTwoDataY = data;
+            setData();
+            console.log("getChartTwoData:");
+            console.log(data);
+            drawEchartTwo();
+        }
+    })
+}
+
+function drawEchartOne() {
     // 基于准备好的dom，初始化echarts实例
     var myChart01 = echarts.init(document.getElementById('businessesEcharts01'));
-    var myChart02 = echarts.init(document.getElementById('businessesEcharts02'));
-    var myChart03 = echarts.init(document.getElementById('businessesEcharts03'));
 
 // 指定图表的配置项和数据
     var option01 = {
         title: {
-            text: '平台每月日入流水'
+            text: '房租日收入额'
         },
         legend:{
-            data:["日入流水"],
+            data:["日收入额"],
             right:'10%'
         },
         tooltip: {
@@ -108,64 +175,38 @@ function drawEcharts() {
             name:'（元）'
         },
         series: [{
-            name: '日入流水',
+            name: '日收入额',
             type: 'line',
             label:{
                 show:true
             },
-            data: days
+            data: chartOneDataY
         }]
     };
 
+// 使用刚指定的配置项和数据显示图表。
+    myChart01.setOption(option01);
+}
+
+
+function drawEchartTwo() {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart02 = echarts.init(document.getElementById('businessesEcharts02'));
+
+// 指定图表的配置项和数据
     var option02 = {
         title: {
-            text: '平台每年月入流水'
-        },
-        legend:{
-            data:["月入流水"],
-            right:'10%'
-        },
-        tooltip: {
-
-        },
-        xAxis: {
-            name:'（月份）',
-            data: months
-        },
-        yAxis: {
-            name:'（元）'
-        },
-        series: [{
-            name: '月入流水',
-            type: 'bar',
-            label:{
-                show:true
-            },
-            data: [10.98,20.98,30,40.10,50.98,60,70,85.80,90,100,10,120]
-        }]
-    };
-
-    var option03 = {
-        title: {
-            text: '上月热租地区占比（前五地区）',
+            text: '上年度租房月收入占比',
             left: 'center'
         },
-        tooltip: {
-
-        },
+        tooltip: {},
         series: [
             {
-                name: '上月热租地区',
+                name: '当月收入',
                 type: 'pie',
                 radius: '55%',
                 center: ['50%', '50%'],
-                data: [
-                    {value: 164780, name: '北京'},
-                    {value: 156730, name: '上海'},
-                    {value: 148904, name: '广东'},
-                    {value: 30039, name: '湖北'},
-                    {value: 20067, name: '浙江'}
-                ],
+                data: yuesdate,
                 emphasis: {
                     itemStyle: {
                         shadowBlur: 10,
@@ -182,8 +223,9 @@ function drawEcharts() {
     };
 
 // 使用刚指定的配置项和数据显示图表。
-    myChart01.setOption(option01);
     myChart02.setOption(option02);
-    myChart03.setOption(option03);
 }
-drawEcharts();
+
+//初始图表
+getChartOneData(initialDate.getFullYear(),initialDate.getMonth()+1,initialDate.getDate(),userId);
+getChartTwoData(initialDate.getFullYear()-1,12,userId);

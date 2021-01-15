@@ -143,143 +143,28 @@
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
-				<ul class="nav nav-list">
-
-					<li class="">
-						<a href="businesses.html">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text">仪表盘</span>
+				<!--功能列表-->
+				<ul id="theFunction" class="nav nav-list">
+					<li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='订单管理', open: fun1.functionName=='订单管理'}">
+						<a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" :class="{'dropdown-toggle': fun1.functionName!='仪表盘'}">
+							<i class="glyphicon glyphicon-th-list"></i>
+							<span class="menu-text">{{fun1.functionName}}</span>
 						</a>
 
 						<b class="arrow"></b>
-					</li>
-					<!-- 房源管理-->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								房源管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="housing_add.html">
+						<ul v-if="level_2[index].length > 0" class="submenu">
+							<li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='orderW05.html'}">
+								<a :href="fun2.address">
 									<i class="menu-icon fa fa-caret-right"></i>
-									新增房源
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="housing_info.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									我的房源
+									{{fun2.functionName}}
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 						</ul>
 					</li>
-					<!-- 订单管理模块 -->
-					<li class="active open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								订单管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="orderW01b.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查看订单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="active">
-								<a href="orderW05.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									审核
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="orderW06.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									入住
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 收入图表管理模块 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-bar-chart-o"></i>
-							<span class="menu-text">
-								图表管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="echartsW01.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									租金收入报表
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 消息模块 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa  fa-comments-o"></i>
-							<span class="menu-text">
-								消息管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="chatW01.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									我的消息
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-
 				</ul>
-
-
+				<!--功能列表-->
 				<!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -385,21 +270,6 @@
 										<div class="pull-right tableTools-container"></div>
 									</div>
 
-									<!-- 搜索框 -->
-									<div class="col-xs-6">
-										<form>
-											<div class="input-group">
-												<input type="text" class="form-control search-query" placeholder="订单号/房源简介" />
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-purple btn-sm" style="background-color: #2A91D8">
-													<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-													查询
-													</button>
-											</span>
-											</div>
-										</form>
-									</div>
-
 									<!-- 控制排版 -->
 									<div class="col-xs-12"><br></div>
 									<!-- div.table-responsive -->
@@ -418,63 +288,65 @@
 												</th>
 												<th>订单号</th>
 												<th>订单金额</th>
-												<th class="hidden-480">入住时间</th>
-												<th class="hidden-480">退房时间</th>
-												<th>入住人</th>
-												<th class="hidden-480">联系方式</th>
-												<th class="hidden-480">房源简介</th>
-												<th>房型</th>
+												<th>房源名</th>
+												<th>入住时间</th>
+												<th>退房时间</th>
+												<th>下单时间</th>
+												<th>详情</th>
 												<th>操作</th>
 											</tr>
 											</thead>
 
 											<tbody>
-											<tr>
+											<tr v-for="(order,index) in ordersList">
 												<td class="center">
 													<label class="pos-rel">
 														<input type="checkbox" class="ace" :checked="allCheck"/>
 														<span class="lbl"></span>
 													</label>
 												</td>
-
+												<td>{{order.orderNumber}}</td>
+												<td>{{order.orderTotal}}</td>
+												<td>{{houseInfoList[index].lot}}</td>
+												<td>{{order.startDate}}</td>
+												<td>{{order.stopDate}}</td>
+												<td>{{order.orderTime}}</td>
 												<td>
-													18374283492365
+													<span class="fa fa-search-plus bigger-150" style="margin-top: 5px" @click="detailShow();pickOrder(index)"></span>
 												</td>
-												<td>450</td>
-												<td class="hidden-480">2020-10-09</td>
-												<td class="hidden-480">2020-10-10</td>
-												<td>小白</td>
-												<td>18765478933</td>
-												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
-												<td>一居室</td>
 												<td>
-													<button class="btn btn-sm btn-success">通过预订</button>
-													<button class="btn btn-sm btn-danger" @click="detailShow">拒绝预订</button>
+													<button class="btn btn-sm btn-success" @click="passCheck(ordersList[index].id)">通过预订</button>
+													<button class="btn btn-sm btn-danger" @click="rejectCheck(ordersList[index].id)">拒绝预订</button>
 												</td>
-
 											</tr>
 											</tbody>
 										</table>
+										<!--提示框-->
+										<div class="col-sm-12">
+											<div align="center" style="margin: auto" v-show="tipFlag">
+												<p style="color: #adadad;font-size:20px;font-weight: bold">暂无订单信息！</p>
+											</div>
+										</div>
 										<!-- 分页 -->
 										<div class="col-sm-12">
-											<p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+											<p style="font-size: 15px;float: right">共{{dateTotal}}条记录，当前是{{pageNo}}/{{pages}}页</p>
 										</div>
 										<div class="col-xs-12" align="center">
 											<div>
 												<ul class="pagination">
-													<li class="disabled">
+													<li @click="getOrders(pageNo-1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
 															<i class="ace-icon fa fa-angle-double-left"></i>
 														</a>
 													</li>
 
-													<li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+													<li v-for="item in navigatePageNums" :class="{active:(item==pageNo)}">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getOrders(item)">{{item}}</a>
 													</li>
 
-													<li>
+													<li @click="getOrders(pageNo+1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
-															<i class="ace-icon fa fa-angle-double-right"></i>
+															<i class="ace-icon fa fa-angle-double-right" ></i>
 														</a>
 													</li>
 												</ul>
@@ -482,6 +354,50 @@
 										</div>
 										<!-- 详情页 -->
 										<div class="col-sm-12" v-show="detailFlag">
+											<div class="table-detail">
+												<div class="row">
+													<div class="col-xs-12 col-sm-3">
+														<div class="text-center">
+															<!-- 内容居中 -->
+														</div>
+													</div>
+
+													<div class="col-xs-12 col-sm-6">
+														<div class="space visible-xs"></div>
+
+														<div class="profile-user-info profile-user-info-striped">
+
+															<div class="profile-info-row">
+																<div class="profile-info-name text-center"> 入住人 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{pickUser.userName}}</span>
+																</div>
+															</div>
+
+															<div class="profile-info-row">
+																<div class="profile-info-name"> 联系方式 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{pickUser.phone}}</span>
+																</div>
+															</div>
+
+															<div class="profile-info-row">
+																<div class="profile-info-name text-center"></div>
+																<div class="profile-info-value text-center">
+																	<button class="btn btn-danger btn-sm" @click="detailClose">关闭</button>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-12 col-sm-3">
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- 拒绝审核原因 -->
+										<div class="col-sm-12" v-show="false">
 											<div class="col-sm-3"></div>
 											<div class="col-sm-6" align="center">
 												<div style="margin: 10px; padding: 10px; border: lightskyblue 1px solid">
@@ -563,12 +479,12 @@
 		<!-- inline scripts related to this page -->
 
 
-		<!-- vue -->
-		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderW05.js"></script>
-
 		<!--txq-->
+		<script src="assets/js/tuo/vue.js"></script>
 		<script src="assets/js/axios.min.js"></script>
 		<script src="assets/js/txq/commons.js"></script>
+
+		<!-- vue -->
+		<script src="assets/js/tuo/orderW05.js"></script>
 	</body>
 </html>

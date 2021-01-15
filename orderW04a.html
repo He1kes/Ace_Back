@@ -143,212 +143,20 @@
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
-				<ul class="nav nav-list">
-
-					<li class="">
-						<a href="admin.html">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text">仪表盘</span>
+				<!--功能列表-->
+				<ul id="theFunction" class="nav nav-list">
+					<li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='订单管理', open: fun1.functionName=='订单管理'}">
+						<a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" :class="{'dropdown-toggle': fun1.functionName!='仪表盘'}">
+							<i class="glyphicon glyphicon-th-list"></i>
+							<span class="menu-text">{{fun1.functionName}}</span>
 						</a>
 
 						<b class="arrow"></b>
-					</li>
-					<!-- 用户管理-->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								用户管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li>
-								<a href="queryuser.html">
+						<ul v-if="level_2[index].length > 0" class="submenu">
+							<li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='orderW04a.html'}">
+								<a :href="fun2.address">
 									<i class="menu-icon fa fa-caret-right"></i>
-									查看用户
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li>
-								<a href="addmanageuser.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									添加管理员
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="changepermission.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									修改权限
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 房源管理-->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								房源管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="housing_review.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									房源审核
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="housing_check.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查询房源
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="housing_off.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									帮扶活动
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 评论管理    -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								评论管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="comment_check.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查询评论
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="comment_ban.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									封禁用户评论
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 订单管理 -->
-					<li class="active open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-							<span class="menu-text">
-								订单管理
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="orderW01a.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									查询订单
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="active">
-								<a href="orderW04a.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									退款
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 图表管理模块 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-bar-chart-o"></i>
-							<span class="menu-text">
-								图表管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="echartsW02.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									利润流水图表
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					<!-- 优惠模块 -->
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-bar-chart-o"></i>
-							<span class="menu-text">
-								优惠管理
-								<span class="badge badge-primary"></span>
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="admaddcoupon.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									发布优惠券
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							<li class="">
-								<a href="admupdatecoupon.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									修改优惠券
+									{{fun2.functionName}}
 								</a>
 
 								<b class="arrow"></b>
@@ -356,7 +164,7 @@
 						</ul>
 					</li>
 				</ul>
-
+				<!--功能列表-->
 
 				<!-- /.nav-list -->
 
@@ -463,21 +271,6 @@
 										<div class="pull-right tableTools-container"></div>
 									</div>
 
-									<!-- 搜索框 -->
-									<div class="col-xs-6">
-										<form>
-											<div class="input-group">
-												<input type="text" class="form-control search-query" placeholder="订单号/房源简介" />
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-purple btn-sm" style="background-color: #2A91D8">
-													<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-													查询
-													</button>
-											</span>
-											</div>
-										</form>
-									</div>
-
 									<!-- 控制排版 -->
 									<div class="col-xs-12"><br></div>
 									<!-- div.table-responsive -->
@@ -495,132 +288,125 @@
 													</label>
 												</th>
 												<th>订单号</th>
-												<th>退款金额</th>
-												<th>入住人</th>
+												<th>订单金额</th>
+												<th>房源名</th>
 												<th>入住时间</th>
+												<th>退房时间</th>
+												<th>下单时间</th>
 												<th>取消原因</th>
-												<th>房东</th>
-												<th>房源</th>
-												<th>房型</th>
+												<th>详情</th>
 												<th>操作</th>
 											</tr>
 											</thead>
 
 											<tbody>
-											<tr>
+											<tr v-for="(order,index) in ordersList">
 												<td class="center">
 													<label class="pos-rel">
 														<input type="checkbox" class="ace" :checked="allCheck"/>
 														<span class="lbl"></span>
 													</label>
 												</td>
-
-												<td>18374283492365</td>
-												<td>450</td>
-												<td>小白</td>
-												<td>2020-12-31</td>
-												<td>下错订单了</td>
-												<td>鹏海民宿</td>
-												<td>鹏海小区,13号,线陈春路站,交通方便,商业地段,随时看房。</td>
-												<td>一居室</td>
+												<td>{{order.orderNumber}}</td>
+												<td>{{order.orderTotal}}</td>
+												<td>{{houseInfoList[index].lot}}</td>
+												<td>{{order.startDate}}</td>
+												<td>{{order.stopDate}}</td>
+												<td>{{order.orderTime}}</td>
+												<td>{{order.cancel}}</td>
+												<td>
+													<span class="fa fa-search-plus bigger-150" style="margin-top: 5px" @click="detailShow();pickOrder(index)"></span>
+												</td>
 												<td>
 													<button class="btn btn-sm btn-success">确认退款</button>
-													<button class="btn btn-sm btn-danger">拒绝退款</button>
 												</td>
 											</tr>
 											</tbody>
 										</table>
+										<!--提示框-->
+										<div class="col-sm-12">
+											<div align="center" style="margin: auto" v-show="tipFlag">
+												<p style="color: #adadad;font-size:20px;font-weight: bold">暂无订单信息！</p>
+											</div>
+										</div>
 										<!-- 分页 -->
 										<div class="col-sm-12">
-											<p style="font-size: 15px;float: right">共 条记录，当前是{{pageActiveNum}}/ 页</p>
+											<p style="font-size: 15px;float: right">共{{dateTotal}}条记录，当前是{{pageNo}}/{{pages}}页</p>
 										</div>
 										<div class="col-xs-12" align="center">
 											<div>
 												<ul class="pagination">
-													<li class="disabled">
+													<li @click="getOrders(pageNo-1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
 															<i class="ace-icon fa fa-angle-double-left"></i>
 														</a>
 													</li>
 
-													<li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
-														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
+													<li v-for="item in navigatePageNums" :class="{active:(item==pageNo)}">
+														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getOrders(item)">{{item}}</a>
 													</li>
 
-													<li>
+													<li @click="getOrders(pageNo+1)">
 														<a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
-															<i class="ace-icon fa fa-angle-double-right"></i>
+															<i class="ace-icon fa fa-angle-double-right" ></i>
 														</a>
 													</li>
 												</ul>
 											</div>
 										</div>
 										<!-- 详情页 -->
-										<div class="col-sm-12" v-show="false">
+										<div class="col-sm-12" v-show="detailFlag">
 											<div class="table-detail">
 												<div class="row">
-													<div class="col-xs-12 col-sm-2">
+													<div class="col-xs-12 col-sm-3">
 														<div class="text-center">
 															<!-- 内容居中 -->
 														</div>
 													</div>
 
-													<div class="col-xs-12 col-sm-8">
+													<div class="col-xs-12 col-sm-6">
 														<div class="space visible-xs"></div>
 
 														<div class="profile-user-info profile-user-info-striped">
-															<div class="profile-info-row">
-																<div class="profile-info-name"> Username </div>
 
-																<div class="profile-info-value">
-																	<span>alexdoe</span>
+															<div class="profile-info-row">
+																<div class="profile-info-name text-center"> 入住人 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{nowUser.userName}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Location </div>
-
-																<div class="profile-info-value">
-																	<i class="fa fa-map-marker light-orange bigger-110"></i>
-																	<span>Netherlands, Amsterdam</span>
+																<div class="profile-info-name"> 联系电话 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{nowUser.phone}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Age </div>
-
-																<div class="profile-info-value">
-																	<span>38</span>
+																<div class="profile-info-name text-center"> 房东 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{pickUser.userName}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Joined </div>
-
-																<div class="profile-info-value">
-																	<span>2010/06/20</span>
+																<div class="profile-info-name"> 联系电话 </div>
+																<div class="profile-info-value text-center">
+																	<span>{{pickUser.phone}}</span>
 																</div>
 															</div>
 
 															<div class="profile-info-row">
-																<div class="profile-info-name"> Last Online </div>
-
-																<div class="profile-info-value">
-																	<span>3 hours ago</span>
-																</div>
-															</div>
-
-															<div class="profile-info-row">
-																<div class="profile-info-name"> About Me </div>
-
-																<div class="profile-info-value">
-																	<span>Bio</span>
+																<div class="profile-info-name text-center"></div>
+																<div class="profile-info-value text-center">
+																	<button class="btn btn-danger btn-sm" @click="detailClose">关闭</button>
 																</div>
 															</div>
 														</div>
 													</div>
 
-													<div class="col-xs-12 col-sm-2">
+													<div class="col-xs-12 col-sm-3">
 
 													</div>
 												</div>
@@ -691,12 +477,12 @@
 		<!-- inline scripts related to this page -->
 
 
-		<!-- vue -->
-		<script src="assets/js/tuo/vue.js"></script>
-		<script src="assets/js/tuo/orderWcommon.js"></script>
-
 		<!--txq-->
+		<script src="assets/js/tuo/vue.js"></script>
 		<script src="assets/js/axios.min.js"></script>
 		<script src="assets/js/txq/commons.js"></script>
+
+		<!-- vue -->
+		<script src="assets/js/tuo/orderW04a.js"></script>
 	</body>
 </html>

@@ -11,7 +11,7 @@ var app = new Vue({
         checkStatus:'',
         pageNum:1,
         pageSize:5,
-        id:2
+        id: localStorage.getItem("useId")
     },
     mounted:function(){
         this.allHouse()

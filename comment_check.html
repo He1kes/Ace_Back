@@ -521,23 +521,23 @@
                                 </table>
                                 <!-- 分页 -->
                                 <div class="col-sm-12">
-                                    <p style="font-size: 15px;float: right">共{{total}}条记录，当前是{{pageActiveNum}}/{{pages}} 页</p>
+                                    <p style="font-size: 15px;float: right">共{{total}}条记录，当前是{{pageNum}}/{{pages}} 页</p>
                                 </div>
                                 <div class="col-xs-12" align="center">
                                     <div>
                                         <ul class="pagination">
                                             <li class="disabled">
-                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px" @click="pageActive(pageNum-1 == 0 ? 1 : pageNum - 1)">
                                                     <i class="ace-icon fa fa-angle-double-left"></i>
                                                 </a>
                                             </li>
 
-                                            <li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
+                                            <li v-for="item in nagiList" :class="{active:(item==pageNum)}">
                                                 <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
                                             </li>
 
                                             <li>
-                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px" @click="pageActive(pageNum+1 > pages ? pages : pageNum + 1)">
                                                     <i class="ace-icon fa fa-angle-double-right"></i>
                                                 </a>
                                             </li>

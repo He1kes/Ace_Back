@@ -470,15 +470,6 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="exampleInputEmail2" placeholder="按房源地址查找">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">房源状态</label>
-                                            <select name="" id="">
-                                                <option value="0" selected="selected">请选择</option>
-                                                <option value="1">通过</option>
-                                                <option value="2">待审核</option>
-                                                <option value="3">不通过</option>
-                                            </select>
-                                        </div>
                                         <button type="button" class="btn btn-purple btn-sm">查询</button>
                                     </form>
                                 </div>
@@ -502,7 +493,6 @@
                                             <th>地址</th>
                                             <th>租金(元/日)</th>
                                             <th>房东</th>
-                                            <th class="hidden-480">联系方式</th>
                                             <th>类型</th>
                                             <th>房屋软装</th>
                                             <th>描述</th>
@@ -512,7 +502,7 @@
                                         </thead>
 
                                         <tbody>
-                                        <tr>
+                                        <tr v-for="h in houseInfo">
                                             <td class="center">
                                                 <label class="pos-rel">
                                                     <input type="checkbox" class="ace" :checked="allCheck"/>
@@ -520,20 +510,15 @@
                                                 </label>
                                             </td>
 
-                                            <td>
-                                                大罗天·仙王府
-                                            </td>
-                                            <td>7777</td>
-                                            <td>明灭仙王</td>
-                                            <td class="hidden-480">
-                                                <span>18765478933</span>
-                                            </td>
-                                            <td>一室两厅</td>
-                                            <td>各式家电齐全,wifi全覆盖</td>
-                                            <td>室内装修风格给人两袖清风,淡淡的节奏,空灵的曲调,使人犹如置身仙境之中</td>
+                                            <td v-text="h.estateName"></td>
+                                            <td v-text="h.rent"></td>
+                                            <td v-text="h.landlordName"></td>
+                                            <td v-text="h.typeName"></td>
+                                            <td v-text="h.label"></td>
+                                            <td v-text="h.desc"></td>
                                             <td><img src="./assets/images/king/bo.png" width="52px" height="33.6px" alt="" data-toggle="modal" data-target=".bs-example-modal-lg"></td>
                                             <td>
-                                                <button class="btn btn-sm btn-danger">下架</button>
+                                                <button class="btn btn-sm btn-danger" @click="stopRent(h.id)">下架</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -547,23 +532,23 @@
                                     </div>
                                     <!-- 分页 -->
                                     <div class="col-sm-12">
-                                        <p style="font-size: 15px;float: right">共{{pageActiveTotal}}条记录，当前是{{pageActiveNum}}/{{pageActiveTotal}} 页</p>
+                                        <p style="font-size: 15px;float: right">共{{total}}条记录，当前是{{pageNum}}/{{pages}} 页</p>
                                     </div>
                                     <div class="col-xs-12" align="center">
                                         <div>
                                             <ul class="pagination">
                                                 <li class="disabled">
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px" @click="pageActive(pageNum-1 == 0 ? 1 : pageNum - 1)">
                                                         <i class="ace-icon fa fa-angle-double-left"></i>
                                                     </a>
                                                 </li>
 
-                                                <li v-for="item in nagiList" :class="{active:(item==pageActiveNum)}">
+                                                <li v-for="item in nagiList" :class="{active:(item==pageNum)}">
                                                     <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="pageActive(item)">{{item}}</a>
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                    <a href="#" style="width: 40px;height:40px;line-height: 25px;font-size: 20px" @click="pageActive(pageNum+1 > pages ? pages : pageNum + 1)">
                                                         <i class="ace-icon fa fa-angle-double-right"></i>
                                                     </a>
                                                 </li>
@@ -707,8 +692,10 @@
 
 
 <!-- vue -->
-<script src="assets/js/tuo/vue.js"></script>
-<script src="assets/js/heikes/commonDemo.js"></script>
+<script src="assets/js/Hip.js"></script>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/axios.min.js"></script>
+<script src="assets/js/heikes/adminHouse2.js"></script>
 
 <!--txq-->
 <script src="assets/js/axios.min.js"></script>

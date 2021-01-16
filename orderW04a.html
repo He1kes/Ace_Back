@@ -318,7 +318,7 @@
 													<span class="fa fa-search-plus bigger-150" style="margin-top: 5px" @click="detailShow();pickOrder(index)"></span>
 												</td>
 												<td>
-													<button class="btn btn-sm btn-success">确认退款</button>
+													<button class="btn btn-sm btn-success" @click="refund(ordersList[index].id)">确认退款</button>
 												</td>
 											</tr>
 											</tbody>

@@ -155,8 +155,18 @@ var app = new Vue({
             )
         },
         //确认退款----------
-        refund:function () {
+        refund:function (orderId) {
             var that = this;
+            axios.get(that.tIP+that.orderIP+"updateOrderStatus?orderId="+orderId+"&orderStatus="+that.rejectStatus, {headers: {'token': that.nowToken}}).then(
+                function (value) {
+                    if(value.data.flag == true){
+                        console.log("退款成功！");
+                        that.getOrders(that.pageNo);
+                    }else {
+                        console.log(value.data.message);
+                    }
+                }
+            )
         }
     }
 })

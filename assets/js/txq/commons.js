@@ -1,4 +1,4 @@
-let txqIp = 'http://192.168.0.16:8888';
+let txqIp = 'http://192.168.2.170:8888';
 const loginDiv = new Vue({
     el: '#loginDiv',
     data: {

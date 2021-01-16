@@ -262,63 +262,76 @@
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS 自己写的内容-->
                         <!-- 搜索框 -->
-                        <div class="col-sm-10">
+                        <div id="coupon" class="col-sm-10">
                             <br><br>
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label for="couponName" class="col-sm-2 control-label">优惠券名称</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="couponName" placeholder="优惠券名称">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="summary" class="col-sm-2 control-label">摘要</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="summary" placeholder="摘要">
+                                        <input v-model="couponName" type="text" class="form-control" id="couponName" placeholder="优惠券名称">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="couponDesc" class="col-sm-2 control-label">描述</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="couponDesc" placeholder="描述">
+                                        <input v-model="couponDesc" type="text" class="form-control" id="couponDesc" placeholder="描述">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="couponCount" class="col-sm-2 control-label">数量</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="couponCount" placeholder="数量">
+                                        <button @click="deCount()" type="button" class="btn-sm btn-default" style="color: #FFF">-</button>
+                                        <input v-model="couponCount" style="width: 5%; text-align: center" type="text" id="couponCount" placeholder="0">
+                                        <button @click="addCount()" type="button" class="btn-sm btn-default" style="color: #FFF">+</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="hasToken" class="col-sm-2 control-label">是否有token</label>
+                                    <label for="couponSeveral" class="col-sm-2 control-label">每人限领</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="hasToken" placeholder="是否有token">
+                                        <button @click="deSeveral()" type="button" class="btn-sm btn-default" style="color: #FFF">-</button>
+                                        <input v-model="couponSeveral" style="width: 5%; text-align: center" type="text" id="couponSeveral" placeholder="0">
+                                        <button @click="addSeveral()" type="button" class="btn-sm btn-default" style="color: #FFF">+</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="startDate" class="col-sm-2 control-label">开始日期</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="startDate">
+                                        <input v-model="startDate" type="date" class="form-control" id="startDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="endDate" class="col-sm-2 control-label">结束日期</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="endDate">
+                                        <input v-model="endDate" type="date" class="form-control" id="endDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="couponType" class="col-sm-2 control-label">优惠券类型</label>
-                                    <select id="couponType">
+                                    <select v-model="couponType" id="couponType">
                                         <option value="0">满减</option>
-                                        <option value="1">立减</option>
-                                        <option value="2">折扣</option>
+                                        <option value="1">折扣</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="couponContent" class="col-sm-2 control-label">优惠内容</label>
+                                    <label for="couponCondition" class="col-sm-2 control-label">优惠条件</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="couponContent" placeholder="优惠内容">
+                                        <span style="font-weight: bold; font-size: 1.5em">满</span>
+                                        <input v-model="couponCondition" type="text" id="couponCondition" placeholder="请输入金额">
+                                        <span style="font-weight: bold; font-size: 1.5em">可用</span>
+                                    </div>
+                                </div>
+                                <div v-show="couponType == 0" class="form-group">
+                                    <label for="couponContent1" class="col-sm-2 control-label">优惠金额</label>
+                                    <div class="col-sm-10">
+                                        <input v-model="couponContent1" type="text" class="form-control" id="couponContent1" placeholder="请输入优惠金额">
+                                    </div>
+                                </div>
+                                <div v-show="couponType == 1" class="form-group">
+                                    <label for="couponContent2" class="col-sm-2 control-label">优惠折扣</label>
+                                    <div class="col-sm-10">
+                                        <button @click="deContent()" type="button" class="btn-sm btn-default" style="color: #FFF">-</button>
+                                        <input v-model="couponContent2.toFixed(1)" style="width: 5%; text-align: center" type="text" id="couponContent2" placeholder="10">
+                                        <button @click="addContent()" type="button" class="btn-sm btn-default" style="color: #FFF">+</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -329,7 +342,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-default">发布</button>
+                                        <span v-if="addFlag" style="color: red">请将信息填写完整<br><br></span>
+                                        <button @click="addCoupon()" type="button" class="btn btn-default">发布</button>
                                     </div>
                                 </div>
                             </form>
@@ -397,11 +411,11 @@
 
 <!-- vue -->
 <script src="assets/js/tuo/vue.js"></script>
-<script src="assets/js/heikes/commonDemo.js"></script>
 
 
 <!--txq-->
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/txq/commons.js"></script>
+<script src="assets/js/txq/admaddcoupon.js"></script>
 </body>
 </html>

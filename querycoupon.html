@@ -5,28 +5,6 @@
     <meta charset="utf-8" />
     <title>管理员</title>
 
-    <!-- basic scripts -->
-
-    <!--[if !IE]> -->
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <!-- <![endif]-->
-
-    <!--[if IE]>
-    <script src="assets/js/jquery-1.11.3.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript">
-        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-    </script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!-- page specific plugin scripts -->
-
-    <!-- ace scripts -->
-    <script src="assets/js/ace-elements.min.js"></script>
-    <script src="assets/js/ace.min.js"></script>
-
-    <!-- inline scripts related to this page -->
-
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
@@ -63,21 +41,10 @@
     <script src="assets/js/html5shiv.min.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-    <!-- page specific plugin scripts -->
-
-    <style>
-       .myTree a:hover {
-            text-decoration-line: none;
-       }
-       .myTree a:focus {
-           text-decoration-line: none;
-       }
-    </style>
-
 </head>
 
 <body class="no-skin">
-<div id="app">
+<div>
     <div id="navbar" class="navbar navbar-default          ace-save-state">
         <div class="navbar-container ace-save-state" id="navbar-container">
             <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -179,7 +146,7 @@
 
             <!--功能列表-->
             <ul id="theFunction" class="nav nav-list">
-                <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='用户管理', open: fun1.functionName=='用户管理'}">
+                <li v-for="(fun1, index) in level_1" :class="{active: fun1.functionName=='优惠管理', open: fun1.functionName=='优惠管理'}">
                     <a :href="fun1.address == null ? 'javascript:void(0);' : fun1.address" :class="{'dropdown-toggle': fun1.functionName!='仪表盘'}">
                         <i class="glyphicon glyphicon-th-list"></i>
                         <span class="menu-text">{{fun1.functionName}}</span>
@@ -187,7 +154,7 @@
 
                     <b class="arrow"></b>
                     <ul v-if="level_2[index].length > 0" class="submenu">
-                        <li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='changepermission2.html'}">
+                        <li v-for="(fun2, ind) in level_2[index]" :class="{active: fun2.address=='querycoupon.html'}">
                             <a :href="fun2.address">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 {{fun2.functionName}}
@@ -199,7 +166,6 @@
                 </li>
             </ul>
             <!--功能列表-->
-
             <!-- /.nav-list -->
 
             <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -219,9 +185,9 @@
                         </li>
 
                         <li>
-                            <a href="#">用户管理</a>
+                            <a href="#">优惠管理</a>
                         </li>
-                        <li class="active">修改权限</li>
+                        <li class="active">查看优惠券</li>
                     </ul><!-- /.breadcrumb -->
                 </div>
 
@@ -293,33 +259,159 @@
                         </div><!-- /.ace-settings-box -->
                     </div><!-- /.ace-settings-container -->
 
-                    <div id="permission" class="row">
+                    <div id="couponTable" class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS 自己写的内容-->
-                            <div class="col-sm-12">
-                                <div class="row">
-                                    <div class="widget-box widget-color-blue2">
-                                        <div class="widget-header">
-                                            <h4 class="widget-title lighter smaller">权限列表</h4>
+
+                            <!-- 表格 -->
+                            <div class="col-xs-12" id="orderTable01">
+                                <h4 class="header smaller lighter blue">优惠券列表</h4>
+                                <!--四个小图标-->
+                                <div class="clearfix">
+                                    <div class="pull-right tableTools-container"></div>
+                                </div>
+
+                                <!-- 搜索框 -->
+                                <div class="col-xs-7">
+                                    <form class="form-inline">
+
+                                        <div class="form-group">
+                                            <label for="userName">优惠条件</label>
+                                            <input v-model="form.couponCondition" type="text" class="form-control" id="userName" placeholder="按优惠条件查找">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="userAccount">优惠内容</label>
+                                            <input v-model="form.couponContent" type="text" class="form-control" id="userAccount" placeholder="按优惠内容查找">
+                                        </div>
+
+                                        <select v-model="form.couponType" @change="changeCouponType($event)" class="form-control">
+                                            <option value="-1">全部优惠券</option>
+                                            <option value="0">满减</option>
+                                            <option value="1">折扣</option>
+                                        </select>
+
+                                        <button @click="getCouponList(1)" type="button" class="btn btn-purple btn-sm">查询</button>
+                                    </form>
+                                </div>
+
+                                <!-- 控制排版 -->
+                                <div class="col-xs-12"><br></div>
+                                <!-- div.table-responsive -->
+
+                                <!-- div.dataTables_borderWrap -->
+                                <!--表格内容主体-->
+                                <div v-show="selectFlag">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="center">
+                                                序号
+                                            </th>
+                                            <th>优惠券名称</th>
+                                            <th>发行数量</th>
+                                            <th>剩余数量</th>
+                                            <th>每人限领</th>
+                                            <th>开始日期</th>
+                                            <th>结束日期</th>
+                                            <th>优惠类型</th>
+                                            <th>使用条件</th>
+                                            <th>优惠内容</th>
+                                            <th>发行方</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr v-for="(item, index) in page.list">
+                                            <td class="center" v-text="(page.pageNum - 1) * page.pageSize + index + 1">
+                                            </td>
+
+                                            <td v-text="item.couponTitle">
+                                                第一张优惠券
+                                            </td>
+                                            <td v-text="item.couponCount">100</td>
+                                            <td>11</td>
+                                            <!--<td v-text="item." class="hidden-480">430523115894289199</td>-->
+                                            <td v-text="item.couponSeveral">1</td>
+                                            <td v-text="item.couponStart">
+                                               2012-12-12
+                                            </td>
+                                            <td v-text="item.couponEnd">
+                                                2012-12-12
+                                            </td>
+                                            <td v-text="item.couponType == 0 ? '满减' : '折扣'">
+                                                满减
+                                            </td>
+                                            <td v-text="item.couponCondition">
+                                                200
+                                            </td>
+                                            <td v-text="item.couponContent">
+                                                20
+                                            </td>
+                                            <td v-text="item.couponScope == -1 ? '平台' :'房东'">
+                                                平台
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger">修改优惠券</button>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- 分页 -->
+                                    <div class="col-sm-12">
+                                        <p style="font-size: 15px;float: right">共{{page.total}}条记录，当前是{{page.pageNum}}/{{page.pages}}页</p>
+                                    </div>
+                                    <div class="col-xs-12" align="center">
                                         <div>
-                                            <ul class="myTree" style="list-style: none">
-                                                <li v-for="(it, index) in level_1" style="margin-bottom: 10px; margin-top: 10px">
-                                                    <input type="checkbox" :checked="functionFlag[index].length > 0 ? false : functionFlag[index]" @click="checkAll(index, $event)">&nbsp;
-                                                    <a style="margin: 10px; font-size: large; color: black; font-weight: bold" href="javascript:void(0);" @click="openLi(index)">{{it.functionName}}<span style="font-size: medium; color: #1B6AAA">（{{it.desc}}）</span></a>
-                                                    <ul v-show="openFlag[index]" style="list-style: none">
-                                                        <li v-for="(i, j) in level_2[index]" style="margin: 8px;font-size: medium">
-                                                            <input :checked="functionFlag[index][j]" type="checkbox">&nbsp;
-                                                            <a href="javascript:void(0);">{{i.functionName}}</a>
-                                                        </li>
-                                                    </ul>
+                                            <ul class="pagination">
+                                                <li :class="{disabled:(page.pageNum == 1)}">
+                                                    <a href="javascript:void(0);" @click="prevPage()" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                        <i class="ace-icon fa fa-angle-double-left"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li v-for="item in page.navigatepageNums" :class="{active:(item==page.pageNum)}">
+                                                    <a href="javascript:void(0);" style="width: 40px;height:40px;line-height: 25px;font-size: 15px" @click="getCouponList(item)">{{item}}</a>
+                                                </li>
+
+                                                <li :class="{disabled:(page.pageNum == page.pages)}">
+                                                    <a href="javascript:void(0);" @click="nextPage()" style="width: 40px;height:40px;line-height: 25px;font-size: 20px">
+                                                        <i class="ace-icon fa fa-angle-double-right"></i>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <a class="btn btn-primary">修改</a>&emsp; <a href="changepermission.html" class="btn btn-warning">返回</a>
                                 </div>
-                            </div><!-- /.col -->
+
+                                <div v-show="!selectFlag">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="center">
+                                                序号
+                                            </th>
+                                            <th>优惠券名称</th>
+                                            <th>发行数量</th>
+                                            <th>剩余数量</th>
+                                            <th>每人限领</th>
+                                            <th>开始日期</th>
+                                            <th>结束日期</th>
+                                            <th>优惠类型</th>
+                                            <th>使用条件</th>
+                                            <th>优惠内容</th>
+                                            <th>发行方</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr align="center"><td colspan="12"><h1>该选项下暂无内容</h1></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <!-- PAGE CONTENT ENDS 自己写的内容 -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -361,14 +453,33 @@
     </div><!-- /.main-container -->
 </div>
 
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script src="assets/js/jquery-2.1.4.min.js"></script>
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+
+
 <!-- vue -->
 <script src="assets/js/tuo/vue.js"></script>
-
-
-<!--txq-->
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/txq/commons.js"></script>
-<script src="assets/js/txq/changepermission2.js"></script>
-
+<script src="assets/js/txq/querycoupon.js"></script>
 </body>
 </html>

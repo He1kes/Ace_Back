@@ -3,14 +3,14 @@ var app = new Vue({
     data:{
         option:"后缀",
         allCheck:false,
-        pageActiveNum:1,
         nagiList:[],
-        menuActiveNum:'',
         pages:'',
         total:'',
         commentList:[],
         userName:[],
-        houseName:[]
+        houseName:[],
+        pageNum:1,
+        pageSize:5
     },
     mounted:function(){
         this.allComment()
@@ -22,18 +22,19 @@ var app = new Vue({
             //console.log(event.target.checked);
             this.allCheck = event.target.checked;
         },
-        //当前选中的页数
+        //上一页下一页
         pageActive:function(item){
-            this.pageActiveNum = item;
-        },
-        //当前选中菜单
-        menuActive:function (item) {
-            this.menuActiveNum = item;
-            console.log(this.menuActiveNum);
+            this.pageNum = item;
+            axios.get(commentIp+"/back/allComment?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&userName="+this.userName+"&houseName="+this.houseName).then(function (value) {
+                app.commentList = value.data.data.list;
+                app.nagiList = value.data.data.navigatepageNums;
+                app.pages = value.data.data.pages;
+                app.total = value.data.data.total;
+            })
         },
         //查询所有评论
         allComment:function () {
-            axios.get(commentIp+"/back/allComment?pageNum=1&pageSize=5").then(function (value) {
+            axios.get(commentIp+"/back/allComment?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&userName="+this.userName+"&houseName="+this.houseName).then(function (value) {
                 app.commentList = value.data.data.list;
                 app.nagiList = value.data.data.navigatepageNums;
                 app.pages = value.data.data.pages;
